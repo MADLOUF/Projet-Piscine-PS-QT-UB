@@ -19,7 +19,7 @@ class Sommet
         int m_x;
         int m_y;
         int m_marquage=0;
-        int m_centraDegree=0;
+        int m_Cd=0;
     public:
         Sommet(std::istream& is);
         int getDegre() const;
