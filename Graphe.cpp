@@ -261,7 +261,7 @@ void Graphe::AlgoDijkstra(int SomInit,int Somfinal)
 }
 
 
-void Graphe::centraliteDegres()
+void Graphe::Cd()
 {
     int compteur = 0;
     int Degmax=0;
@@ -281,10 +281,53 @@ void Graphe::centraliteDegres()
     for (int i=0; i<getOrdre() ; i++)
     {
 
-        indice = (m_sommets[i]->getDegre())/(Degmax);
-        m_sommets[i]->setCentradeg(indice);
+        indice = (m_sommets[i]->getDegre())/(Degmax - 1);
+        m_sommets[i]->setCd(indice);
 
     }
+
+}
+
+void Graphe::Cvp()
+{
+    int L=0;///Lambda
+    int L2=10;
+    int C=0;
+    int Somme=0;
+    std::vector<int> ListeADJ;
+    while(L<-L2 && L>L2)
+   {
+      L2=L1;
+      L=0;
+    for(int i =0;i<getOrdre();++i)///Faire la somme des indices de ses voisins
+    {
+        C=0;
+        ListeADJ=m_sommets[i]->getAdjListe();
+        for (int y=0;y<m_sommets[i]->getDegre();++y)
+        {
+            Somme=Somme+m_sommets[ListeADJ[y]]->getCvp();///Calcule de C=Somme(Cvp) des sommets adjacants
+        }
+        ListeADJ.clear();///On renitialise la liste d'adjacance pr les prochains sommets
+        C=Somme;
+        m_sommets[i]->setC(C);
+    }
+    
+    Somme=0;
+    
+    for(int i =0;i<getOrdre();++i)///Calculer Lambda = (Somme des C)^1/2
+    {
+       Somme=Somme+m_sommets[i]->getC();
+    }
+    
+    L=pow(Somme,0.5);
+    Somme=0;
+    
+    for(int i =0;i<getOrdre();++i)///Recalculer l'indice Cvp pour chaque sommet
+    {
+       m_sommets[i]->setCvp(m_sommets[i]->getC()/L);
+    }
+
+   }
 
 }
 
