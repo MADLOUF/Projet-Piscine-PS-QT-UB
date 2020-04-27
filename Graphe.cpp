@@ -258,24 +258,33 @@ void Graphe::AlgoDijkstra(int SomInit,int Somfinal)
             }
             std::cout<<std::endl;
             std::cout<<"Chemin de Longueur : "<<m_parcours[IDParcours(Somfinal)][0]<<std::endl;
-    
 }
 
 
-
-void Function::centraliteDegres(int indice, int Degmax) 
+void Graphe::centraliteDegres()
 {
+    int compteur = 0;
+    int Degmax=0;
+    int indice = 0;
 
-    for (int i=0; i<getSommet() ; i++)
+    for (int i=0; i<getOrdre() ; i++)
     {
-        int compteur = 0;
 
-        if(getDegres()> compteur)
+        if(m_sommets[i]->getDegre()> compteur)
         {
-            compteur = getDegres();
+            compteur = m_sommets[i]->getDegre();
         }
-        Degmax = compteur;
+
+    }
+    Degmax = compteur;
+
+    for (int i=0; i<getOrdre() ; i++)
+    {
+
+        indice = (m_sommets[i]->getDegre())/(Degmax - 1);
+        m_sommets[i]->setCentradeg(indice);
+
     }
 
-    indice = (getDegres())/(Degmax - 1);
 }
+
