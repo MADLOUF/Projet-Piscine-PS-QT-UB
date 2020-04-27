@@ -58,9 +58,9 @@ void Sommet::setMarquage(int coul)
 {
     m_marquage=coul;
 }
-void Sommet::setCentradeg(int deg)
+void Sommet::setCd(int deg)
 {
-    m_centraDegree=deg;
+    m_Cd=deg;
 }
 void Sommet::Adjtrie()
 {
