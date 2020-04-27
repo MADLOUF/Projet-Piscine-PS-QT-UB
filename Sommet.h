@@ -19,6 +19,7 @@ class Sommet
         int m_x;
         int m_y;
         int m_marquage=0;
+        int m_centraDegree=0;
     public:
         Sommet(std::istream& is);
         int getDegre() const;
@@ -30,6 +31,7 @@ class Sommet
         char getNom () const;
         void Adjacent(int ID);
         void setMarquage(int coul);
+        void setCentradeg(int Deg);
         void Adjtrie();
         void afficherAdj();
 
