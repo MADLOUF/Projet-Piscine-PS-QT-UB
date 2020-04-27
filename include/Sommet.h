@@ -15,7 +15,7 @@ class Sommet
  private:
         std::vector<int> m_adjacents;
         int m_id;
-        char m_nom;
+        std::string m_nom;
         int m_x;
         int m_y;
         int m_marquage=0;
@@ -34,7 +34,7 @@ class Sommet
         int getC()const;
         int getCvp()const;
         int getCd()const;
-        char getNom () const;
+        std::string getNom () const;
         void Adjacent(int ID);
         void setMarquage(int coul);
         void setCd(int C);

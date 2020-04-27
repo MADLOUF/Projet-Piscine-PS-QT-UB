@@ -33,6 +33,7 @@ class Graphe
         int PoidsArrete(int ID1,int ID2);
         int TotalCouleur();
         void afficherAdjacance();
+        void afficherGraphe();
         int PlusPetiteLongueur(std::vector<std::vector<int>> parcours);
         int IDParcours(int somFinal);
         int NmbrAdjNonmarque(int ID);

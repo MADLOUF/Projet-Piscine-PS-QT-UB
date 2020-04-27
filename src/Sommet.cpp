@@ -46,7 +46,7 @@ int Sommet::getY ()const
 {
     return m_y;
 }
-char Sommet::getNom ()const
+std::string Sommet::getNom ()const
 {
     return m_nom;
 }

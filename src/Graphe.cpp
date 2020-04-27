@@ -1,6 +1,7 @@
 #include "Graphe.h"
 #include "Sommet.h"
 #include "Arrete.h"
+#include "svg.h"
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -328,6 +329,34 @@ void Graphe::Cvp()
     }
 
    }
+
+}
+
+void Graphe::afficherGraphe()
+{
+    Svgfile svgout;
+        ///placer les sommets
+
+        for(int i=0; i<m_sommets.size();i++)
+        {
+            svgout.addDisk(m_sommets[i]->getX()*100 , m_sommets[i]->getY()*100, 5, "blue");
+            ///afficher les lettres
+            svgout.addText(m_sommets[i]->getX()*100 , m_sommets[i]->getY()*100-5, m_sommets[i]->getNom(),"black" );
+
+        }
+
+        ///placer les arretes
+        int s1, s2;
+
+        for(int i=0; i<m_arretes.size();i++)
+        {
+            s1 = m_arretes[i]->getID1();
+            s2 = m_arretes[i]->getID2();
+            svgout.addLine(m_sommets[s1]->getX()*100, m_sommets[s1]->getY()*100, m_sommets[s2]->getX()*100, m_sommets[s2]->getY()*100, "black");
+
+        }
+
+
 
 }
 
