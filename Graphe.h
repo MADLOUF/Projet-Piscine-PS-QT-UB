@@ -37,7 +37,9 @@ class Graphe
         int IDParcours(int somFinal);
         int NmbrAdjNonmarque(int ID);
         void AlgoDijkstra(int SomInit,int Somfinal);
-        void centraliteDegres();
+        void test();
+        void Cd();
+        void Cvp();
 
 };
 
