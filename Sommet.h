@@ -31,7 +31,7 @@ class Sommet
         char getNom () const;
         void Adjacent(int ID);
         void setMarquage(int coul);
-        void setCentradeg(int Deg);
+        void setCd(int Deg);
         void Adjtrie();
         void afficherAdj();
 
