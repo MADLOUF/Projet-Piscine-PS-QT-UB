@@ -29,7 +29,7 @@ class Graphe
         int getOrdre() const;
         int getTaille() const;
         void DeterminerAdjacance();
-        int rechercheID(int ID);///Inutile ??? Car les ID représente la position du sommet dans le vecteur.
+        int rechercheID(int ID);///Inutile ??? Car les ID reprÃ©sente la position du sommet dans le vecteur.
         int PoidsArrete(int ID1,int ID2);
         int TotalCouleur();
         void afficherAdjacance();
@@ -37,6 +37,7 @@ class Graphe
         int IDParcours(int somFinal);
         int NmbrAdjNonmarque(int ID);
         void AlgoDijkstra(int SomInit,int Somfinal);
+        void centraliteDegres();
 
 };
 
