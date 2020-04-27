@@ -11,7 +11,7 @@ Arrete::Arrete (std::istream& is)///Lecture du fichier
         {
 
             is >> m_NumArrete;
-            std::cout <<"  ID :"<< m_NumArrete<<" ";
+            /*std::cout <<"  ID :"<< m_NumArrete<<" ";*/
             is >> m_ID1;
             std::cout << "Extremites : "<<m_ID1<<" ";
             is >>m_ID2;
