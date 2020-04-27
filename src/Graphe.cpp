@@ -338,7 +338,6 @@ void Graphe::Cp()
     int indice = 0;
     int DegMax = 0;
     int compteur = 0;
-    int C = 0;
     int Somme = 0;
 
 
