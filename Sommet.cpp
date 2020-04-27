@@ -34,6 +34,10 @@ int Sommet::getAdj( int i) const
 {
     return m_adjacents[i];
 }
+std::vector<int> Sommet::getAdjListe() const
+{
+    return m_adjacents;
+}
 int Sommet::getX ()const
 {
     return m_x;
@@ -50,6 +54,18 @@ int Sommet::getMarquage ()const
 {
     return m_marquage;
 }
+int Sommet::getC() const
+{
+    return m_C;
+}
+int Sommet::getCvp() const
+{
+    return m_Cvp;
+}
+int Sommet::getCd() const
+{
+    return m_Cd;
+}
 void Sommet::Adjacent(int ID)
 {
      m_adjacents.push_back(ID);
@@ -58,9 +74,17 @@ void Sommet::setMarquage(int coul)
 {
     m_marquage=coul;
 }
-void Sommet::setCd(int deg)
+void Sommet::setCd(int C)
 {
-    m_Cd=deg;
+    m_Cd=C;
+}
+void Sommet::setCvp(int C)
+{
+    m_Cvp=C;
+}
+void Sommet::setC(int C)
+{
+    m_C=C;
 }
 void Sommet::Adjtrie()
 {
