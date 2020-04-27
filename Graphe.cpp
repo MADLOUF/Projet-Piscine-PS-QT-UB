@@ -297,7 +297,7 @@ void Graphe::Cvp()
     std::vector<int> ListeADJ;
     while(L<-L2 && L>L2)
    {
-      L2=L1;
+      L2=L;
       L=0;
     for(int i =0;i<getOrdre();++i)///Faire la somme des indices de ses voisins
     {
