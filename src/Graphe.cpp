@@ -30,7 +30,7 @@ Graphe::Graphe(std::string nomFichier)
             std::cout<<std::endl;
 
               if ( ifs.fail() )
-                throw std::runtime_error("Probleme lecture orienté du graphe");
+                throw std::runtime_error("Probleme lecture orientÃ© du graphe");
             int ordre;
             ifs >> ordre;
             std::cout<<"Ordre : "<<ordre<<std::endl;
@@ -69,11 +69,11 @@ int Graphe::getOrdre() const
 }
  void Graphe::DeterminerAdjacance()
 {
-    if(m_oriente==1)///Pour un graphe orienté
+    if(m_oriente==1)///Pour un graphe orientÃ©
            {
-            for (int i =0 ; i<getOrdre();i++)///Parcours de la totalité des sommets
+            for (int i =0 ; i<getOrdre();i++)///Parcours de la totalitÃ© des sommets
             {
-                for (int y=0;y<getTaille();y++)///Parcours de la totalité des arretes
+                for (int y=0;y<getTaille();y++)///Parcours de la totalitÃ© des arretes
                 {
                     if(m_sommets[i]->getID()==m_arretes[y]->getID1())
                     {
@@ -83,7 +83,7 @@ int Graphe::getOrdre() const
                 m_sommets[i]->Adjtrie();
             }
           }
-          else if (m_oriente==0)///Pour un graphe non orienté
+          else if (m_oriente==0)///Pour un graphe non orientÃ©
           {
             for (int i =0 ; i<getOrdre();i++)
              {
@@ -137,7 +137,7 @@ int Graphe::TotalCouleur()
                    compteur++;
                }
             }
-            if (compteur==0)/// s'il ny a plus de sommet  non coloriée return 1
+            if (compteur==0)/// s'il ny a plus de sommet  non coloriÃ©e return 1
             {
                 return 1;
             }
@@ -188,9 +188,9 @@ int Graphe::IDParcours(int somFinal)
 int Graphe::NmbrAdjNonmarque(int ID)
 {
     int compteur=0;
-                    for (int i =0;i<m_sommets[rechercheID(ID)]->getDegre();++i) ///On recupere le degrée pour parcourir la totalité des sommets adjacents
+                    for (int i =0;i<m_sommets[rechercheID(ID)]->getDegre();++i) ///On recupere le degrÃ©e pour parcourir la totalitÃ© des sommets adjacents
                 {
-                if(m_sommets[rechercheID(m_sommets[ID]->getAdj(i))]->getMarquage()==0)///Si le sommet Adj n'est pas déja marqué
+                if(m_sommets[rechercheID(m_sommets[ID]->getAdj(i))]->getMarquage()==0)///Si le sommet Adj n'est pas dÃ©ja marquÃ©
                     {
                         compteur++;
                     }
@@ -207,13 +207,13 @@ void Graphe::AlgoDijkstra(int SomInit,int Somfinal)
             std::vector<int> stock2;
             stock.push_back(0);
             stock.push_back(Som);
-            m_parcours.push_back(stock);///Le sommet est à une longueur 0 de lui meme
+            m_parcours.push_back(stock);///Le sommet est Ã  une longueur 0 de lui meme
             int NumParcours=0;
 
             while(m_sommets[rechercheID(Somfinal)]->getMarquage()==0)
             {
                 std::cout<<"Etape N :"<<EtapeCompteur<<std::endl;
-                ///Preparation à l'actualisation des sommets
+                ///Preparation Ã  l'actualisation des sommets
                 stock.clear();
                 stock=m_parcours[NumParcours];
                 stock2=stock;
@@ -222,10 +222,10 @@ void Graphe::AlgoDijkstra(int SomInit,int Somfinal)
 
 
 
-                for (int i =0;i<m_sommets[rechercheID(Som)]->getDegre();++i) //Parcours de la totalité des adjacent
+                for (int i =0;i<m_sommets[rechercheID(Som)]->getDegre();++i) //Parcours de la totalitÃ© des adjacent
                 {
                     stock=stock2;
-                    if(m_sommets[rechercheID(m_sommets[Som]->getAdj(i))]->getMarquage()==0)//Adj uniquement non marqué
+                    if(m_sommets[rechercheID(m_sommets[Som]->getAdj(i))]->getMarquage()==0)//Adj uniquement non marquÃ©
                     {
                         stock.push_back(m_sommets[Som]->getAdj(i));
 
@@ -332,6 +332,8 @@ void Graphe::Cvp()
 
 }
 
+
+
 void Graphe::afficherGraphe()
 {
     Svgfile svgout;
@@ -359,4 +361,38 @@ void Graphe::afficherGraphe()
 
 
 }
+
+
+void Graphe::Cp()
+{
+    int SomDepart;
+    int SomFin;
+    int indice = 0;
+    int DegMax = 0;
+    int compteur = 0;
+    int Somme = 0;
+
+
+    for(int i=0 ; i<getOrdre() ; i++)
+    {
+        Somme = Somme + AlgoDijkstra(SomDepart,SomFin);
+    }
+
+    for(int i=0 ; i<getOrdre() ; i++)
+    {
+        if(m_sommets[i]->getDegre()> compteur)
+        {
+            compteur = m_sommets[i]->getDegre();
+        }
+
+    }
+    DegMax = compteur;
+
+    for(int i=0 ; i<getOrdre() ; i++)
+    {
+        indice = (DegMax)/(Somme);
+        m_sommets[i]->setCp(indice);
+    }
+
+
 
