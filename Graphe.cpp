@@ -281,7 +281,7 @@ void Graphe::centraliteDegres()
     for (int i=0; i<getOrdre() ; i++)
     {
 
-        indice = (m_sommets[i]->getDegre())/(Degmax - 1);
+        indice = (m_sommets[i]->getDegre())/(Degmax);
         m_sommets[i]->setCentradeg(indice);
 
     }
