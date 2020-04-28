@@ -141,14 +141,14 @@
 	<iostream>
 	<Graphe.h>
 
-1588076905 source:d:\ece 19-20\informatique\c++\projet-piscine-ps-qt-ub\main.cpp
+1588086401 source:d:\ece 19-20\informatique\c++\projet-piscine-ps-qt-ub\main.cpp
 	<iostream>
 	"Graphe.h"
 	"Sommet.h"
 	"Arrete.h"
 	"svg.h"
 
-1588076245 d:\ece 19-20\informatique\c++\projet-piscine-ps-qt-ub\include\graphe.h
+1588079991 d:\ece 19-20\informatique\c++\projet-piscine-ps-qt-ub\include\graphe.h
 	<Sommet.h>
 	<Arrete.h>
 	<iostream>
@@ -170,7 +170,7 @@
 	<algorithm>
 	<cmath>
 
-1588002690 d:\ece 19-20\informatique\c++\projet-piscine-ps-qt-ub\include\arrete.h
+1588087312 d:\ece 19-20\informatique\c++\projet-piscine-ps-qt-ub\include\arrete.h
 	<iostream>
 	<iomanip>
 	<fstream>
@@ -191,7 +191,7 @@
 	<algorithm>
 	<cmath>
 
-1588079381 source:d:\ece 19-20\informatique\c++\projet-piscine-ps-qt-ub\src\graphe.cpp
+1588083778 source:d:\ece 19-20\informatique\c++\projet-piscine-ps-qt-ub\src\graphe.cpp
 	"Graphe.h"
 	"Sommet.h"
 	"Arrete.h"
@@ -217,13 +217,99 @@
 	<algorithm>
 	<cmath>
 
-1588001525 source:d:\ece 19-20\informatique\c++\projet-piscine-ps-qt-ub\src\svg.cpp
+1588079991 source:d:\ece 19-20\informatique\c++\projet-piscine-ps-qt-ub\src\svg.cpp
 	"svg.h"
 	<iostream>
 	<sstream>
 
-1587996992 d:\ece 19-20\informatique\c++\projet-piscine-ps-qt-ub\include\svg.h
+1588079991 d:\ece 19-20\informatique\c++\projet-piscine-ps-qt-ub\include\svg.h
 	<string>
 	<fstream>
 	<set>
+
+1588080436 source:c:\users\pauls\desktop\projet piscine\projet-piscine-ps-qt-ub-master\main.cpp
+	<iostream>
+	"Graphe.h"
+	"Sommet.h"
+	"Arrete.h"
+	"svg.h"
+
+1588080285 c:\users\pauls\desktop\projet piscine\projet-piscine-ps-qt-ub-master\include\graphe.h
+	<Sommet.h>
+	<Arrete.h>
+	<iostream>
+	<iomanip>
+	<fstream>
+	<string>
+	<vector>
+	<stack>
+	<algorithm>
+	<cmath>
+
+1588080270 c:\users\pauls\desktop\projet piscine\projet-piscine-ps-qt-ub-master\include\sommet.h
+	<iostream>
+	<iomanip>
+	<fstream>
+	<string>
+	<vector>
+	<stack>
+	<algorithm>
+	<cmath>
+
+1588079774 c:\users\pauls\desktop\projet piscine\projet-piscine-ps-qt-ub-master\include\arrete.h
+	<iostream>
+	<iomanip>
+	<fstream>
+	<string>
+	<vector>
+	<stack>
+	<algorithm>
+	<cmath>
+
+1588080371 c:\users\pauls\desktop\projet piscine\projet-piscine-ps-qt-ub-master\include\svg.h
+	<string>
+	<fstream>
+	<set>
+
+1588079774 source:c:\users\pauls\desktop\projet piscine\projet-piscine-ps-qt-ub-master\src\arrete.cpp
+	"Arrete.h"
+	<iostream>
+	<iomanip>
+	<fstream>
+	<string>
+	<vector>
+	<stack>
+	<algorithm>
+	<cmath>
+
+1588079774 source:c:\users\pauls\desktop\projet piscine\projet-piscine-ps-qt-ub-master\src\graphe.cpp
+	"Graphe.h"
+	"Sommet.h"
+	"Arrete.h"
+	"svg.h"
+	<iostream>
+	<iomanip>
+	<fstream>
+	<string>
+	<vector>
+	<stack>
+	<queue>
+	<algorithm>
+	<cmath>
+
+1588079774 source:c:\users\pauls\desktop\projet piscine\projet-piscine-ps-qt-ub-master\src\sommet.cpp
+	"Sommet.h"
+	<iostream>
+	<iomanip>
+	<fstream>
+	<string>
+	<vector>
+	<stack>
+	<algorithm>
+	<cmath>
+
+1588080371 source:c:\users\pauls\desktop\projet piscine\projet-piscine-ps-qt-ub-master\src\svg.cpp
+	"svg.h"
+	<iostream>
+	<sstream>
 

@@ -20,18 +20,31 @@
 <circle cx="500" cy="500" r="5" fill="blue" />
 <text x="510" y="505" fill="black" >I</text>
 <line x1="300" y1="100" x2="200" y2="200" stroke="black" />
+<text x="260" y="160" fill="green" >0</text>
 <line x1="300" y1="100" x2="400" y2="200" stroke="black" />
+<text x="360" y="160" fill="green" >1</text>
 <line x1="200" y1="200" x2="300" y2="300" stroke="black" />
+<text x="260" y="260" fill="green" >2</text>
 <line x1="400" y1="200" x2="300" y2="300" stroke="black" />
+<text x="360" y="260" fill="green" >3</text>
 <line x1="300" y1="300" x2="200" y2="400" stroke="black" />
+<text x="260" y="360" fill="green" >4</text>
 <line x1="300" y1="300" x2="400" y2="400" stroke="black" />
+<text x="360" y="360" fill="green" >5</text>
 <line x1="200" y1="200" x2="100" y2="500" stroke="black" />
+<text x="160" y="360" fill="green" >6</text>
 <line x1="400" y1="200" x2="500" y2="500" stroke="black" />
+<text x="460" y="360" fill="green" >7</text>
 <line x1="200" y1="400" x2="300" y2="400" stroke="black" />
+<text x="260" y="410" fill="green" >8</text>
 <line x1="300" y1="400" x2="400" y2="400" stroke="black" />
+<text x="360" y="410" fill="green" >9</text>
 <line x1="400" y1="400" x2="500" y2="500" stroke="black" />
+<text x="460" y="460" fill="green" >10</text>
 <line x1="200" y1="400" x2="100" y2="500" stroke="black" />
+<text x="160" y="460" fill="green" >11</text>
 <line x1="100" y1="500" x2="500" y2="500" stroke="black" />
+<text x="310" y="510" fill="green" >12</text>
 
 
 </svg>
