@@ -350,6 +350,7 @@ void Graphe::afficherGraphe()
             ///afficher les lettres
             svgout.addText(m_sommets[i]->getX()*100 , m_sommets[i]->getY()*100-5, m_sommets[i]->getNom(),"black" );
 
+
         }
 
         ///placer les arretes
@@ -360,7 +361,7 @@ void Graphe::afficherGraphe()
             s1 = m_arretes[i]->getID1();
             s2 = m_arretes[i]->getID2();
             svgout.addLine(m_sommets[s1]->getX()*100, m_sommets[s1]->getY()*100, m_sommets[s2]->getX()*100, m_sommets[s2]->getY()*100, "black");
-
+            svgout.addText((m_sommets[s1]->getX()*100+ m_sommets[s2]->getX()*100)/2, (m_sommets[s1]->getY()*100+ m_sommets[s2]->getY()*100)/2, m_arretes[i]->getNumArrete(),"green" );
         }
 
 
@@ -468,24 +469,59 @@ void Graphe :: rechercher_afficher_CC()
     }while(test==true);
     std::cout<<std::endl;
 }
-   void Graphe::setPPL(int PPL)
+void Graphe::vulnerabilite()
+{
+    int test=0;
+    int a1=0;
+    std::vector<int> ListeADJ;
+
+    do
+    {
+        std::cout<<"Rentrez le numero de l'arete que vous voulez supprimer"<<std::endl;
+        std::cin>>a1;
+        m_arretes.erase (m_arretes.begin()+a1+1);
+
+        for(size_t i=0;i<m_sommets.size();++i)
         {
-            m_PPLongueur=PPL;
-        }
-        int Graphe::getPPL()
-        {
-            return m_PPLongueur;
-        }
-        void Graphe::MemeLong(int Somfinal)
-        {
-            for(size_t i=0 ;i<m_parcours.size();++i)
+            m_sommets[i]->Erase_Adjacent();
+            ListeADJ = m_sommets[i]->getAdjListe() ;
+            for(auto element : ListeADJ )
             {
-                if(m_parcours[i][0]==getPPL()&&m_parcours[i][m_parcours[i].size()-1]==Somfinal)
-                {
-                    m_parcours[i][1]=1;
-                }
+
+                std::cout<<"coucou: "<<element<<std::endl;
             }
         }
+
+        DeterminerAdjacance();
+        afficherGraphe();
+        std::cout<<"Vous avez supprim\202 l'arete "<<a1<<". Pour supprimer une autre arete, tapez 0 sinon tapez 1"<<std::endl;
+        std::cin>>test;
+    }while(test==0);
+
+    rechercher_afficher_CC();
+
+}
+
+void Graphe::setPPL(int PPL)
+{
+    m_PPLongueur=PPL;
+}
+
+int Graphe::getPPL()
+{
+    return m_PPLongueur;
+}
+
+void Graphe::MemeLong(int Somfinal)
+{
+    for(size_t i=0 ;i<m_parcours.size();++i)
+    {
+        if(m_parcours[i][0]==getPPL()&&m_parcours[i][m_parcours[i].size()-1]==Somfinal)
+        {
+            m_parcours[i][1]=1;
+        }
+    }
+}
 
 void Graphe::DijkstraModif(int SomInit,int Somfinal)
 {
@@ -547,42 +583,6 @@ void Graphe::DijkstraModif(int SomInit,int Somfinal)
                     setPPL(m_parcours[IDParcours(Somfinal)][0]);
                     MemeLong(rechercheID(Somfinal));
                 }
-
-void Graphe::vulnerabilite()
-{
-    int test=0;
-    int a1=0;
-    std::vector<int> ListeADJ;
-
-    do
-    {
-        std::cout<<"Rentrez le numero de l'arete que vous voulez supprimer"<<std::endl;
-        std::cin>>a1;
-        m_arretes.erase (m_arretes.begin()+a1+1);
-
-        for(size_t i=0;i<m_sommets.size();++i)
-        {
-            m_sommets[i]->Erase_Adjacent();
-            ListeADJ = m_sommets[i]->getAdjListe() ;
-            for(auto element : ListeADJ )
-            {
-
-                std::cout<<"coucou: "<<element<<std::endl;
-            }
-        }
-
-        DeterminerAdjacance();
-        afficherGraphe();
-        std::cout<<"Vous avez supprim\202 l'arete "<<a1<<". Pour supprimer une autre arete, tapez 0 sinon tapez 1"<<std::endl;
-        std::cin>>test;
-    }while(test==0);
-
-    rechercher_afficher_CC();
-
-}
-
-
-
 
             }
             //////AFFICHAGE//////

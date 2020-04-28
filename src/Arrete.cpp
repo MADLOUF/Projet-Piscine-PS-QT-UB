@@ -34,4 +34,7 @@ int Arrete::getPoids() const
         {
             return m_poids;
         }
-
+int Arrete::getNumArrete() const
+        {
+            return m_NumArrete;
+        }

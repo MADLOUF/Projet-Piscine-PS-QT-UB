@@ -21,6 +21,7 @@ public :
         int getID1() const;
         int getID2() const;
         int getPoids() const;
+        int getNumArrete() const;
 
 };
 
