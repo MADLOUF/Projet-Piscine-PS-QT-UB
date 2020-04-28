@@ -10,6 +10,7 @@ int main()
 {
     Graphe graphe{"graphe_cycle5_topo.txt"};
     graphe.afficherGraphe();
-    graphe.rechercher_afficher_CC();
+    graphe.vulnerabilite();
+
     return 0;
 }

@@ -36,6 +36,7 @@ class Sommet
         int getCd()const;
         std::string getNom () const;
         void Adjacent(int ID);
+        void Erase_Adjacent();
         void setMarquage(int coul);
         void setCd(int C);
         void setCvp(int C);

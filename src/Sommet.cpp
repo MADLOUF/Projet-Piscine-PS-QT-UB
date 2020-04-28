@@ -70,6 +70,10 @@ void Sommet::Adjacent(int ID)
 {
      m_adjacents.push_back(ID);
 }
+void Sommet::Erase_Adjacent()
+{
+     m_adjacents.clear();
+}
 void Sommet::setMarquage(int coul)
 {
     m_marquage=coul;

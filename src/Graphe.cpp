@@ -366,7 +366,6 @@ void Graphe::afficherGraphe()
 
 
 }
-
 /*
 void Graphe::Cp()
 {
@@ -390,8 +389,8 @@ void Graphe::Cp()
         indice = (DegMax)/(Somme);
         m_sommets[i]->setCp(indice);
     }
+}
 */
-
 std::vector<int> Graphe:: BFS(int num_s0)const
 {
 
@@ -468,6 +467,39 @@ void Graphe :: rechercher_afficher_CC()
         }
     }while(test==true);
     std::cout<<std::endl;
+}
+
+void Graphe::vulnerabilite()
+{
+    int test=0;
+    int a1=0;
+    std::vector<int> ListeADJ;
+
+    do
+    {
+        std::cout<<"Rentrez le numero de l'arete que vous voulez supprimer"<<std::endl;
+        std::cin>>a1;
+        m_arretes.erase (m_arretes.begin()+a1+1);
+
+        for(size_t i=0;i<m_sommets.size();++i)
+        {
+            m_sommets[i]->Erase_Adjacent();
+            ListeADJ = m_sommets[i]->getAdjListe() ;
+            for(auto element : ListeADJ )
+            {
+
+                std::cout<<"coucou: "<<element<<std::endl;
+            }
+        }
+
+        DeterminerAdjacance();
+        afficherGraphe();
+        std::cout<<"Vous avez supprim\202 l'arete "<<a1<<". Pour supprimer une autre arete, tapez 0 sinon tapez 1"<<std::endl;
+        std::cin>>test;
+    }while(test==0);
+
+    rechercher_afficher_CC();
+
 }
 
 
