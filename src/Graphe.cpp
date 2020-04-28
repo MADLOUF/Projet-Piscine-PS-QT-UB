@@ -124,6 +124,10 @@ int Graphe::PoidsArrete(int ID1,int ID2)
                 {
                     return m_arretes[i]->getPoids();
                 }
+                else if(m_oriente==0&&m_arretes[i]->getID1()==ID2&&m_arretes[i]->getID2()==ID1)
+                {
+                    return m_arretes[i]->getPoids();
+                }
             }
             return 0;
 }
