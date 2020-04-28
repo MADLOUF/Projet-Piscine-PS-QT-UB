@@ -41,10 +41,11 @@ class Graphe
         int getPPL();
         void MemeLong(int Somfinal);
         void AlgoDijkstra(int SomInit,int Somfinal);
-        void DijkstraModif(int SomInit,int Somfinal);
+        std::vector<std::vector<int>> DijkstraModif(int SomInit,int Somfinal);
         void Cd();
         void Cvp();
         void Cp();
+        void Ci();
         void vulnerabilite();
         void afficher_Cd();
         void afficher_Cvp();
