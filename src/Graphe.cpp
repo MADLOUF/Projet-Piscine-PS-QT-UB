@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <stack>
+#include <queue>
 #include <algorithm>
 #include <cmath>
 
@@ -366,7 +367,7 @@ void Graphe::afficherGraphe()
 
 }
 
-
+/*
 void Graphe::Cp()
 {
     int SomDepart;
@@ -389,6 +390,85 @@ void Graphe::Cp()
         indice = (DegMax)/(Somme);
         m_sommets[i]->setCp(indice);
     }
+*/
+
+std::vector<int> Graphe:: BFS(int num_s0)const
+{
+
+    std::cout<<"parcours BFS :";
+    /// déclaration de la file
+    std::queue<int> file;
+    /// pour le marquage
+    std::vector<int> couleurs((int)m_sommets.size(),0);
+    ///pour noter les prédécesseurs : on note les numéros des prédécesseurs (on pourrait stocker des pointeurs sur ...)
+    std::vector<int> preds((int)m_sommets.size(),-1);
+
+    ///étape initiale : on enfile et on marque le sommet initial
+    file.push(num_s0);
+    couleurs[num_s0]=1;
+
+    int s;
+
+    ///tant que la file n'est pas vide
+    while(!file.empty())
+    {
+        ///on défile le prochain sommet
+        s = file.front();
+        std::cout<<" "<<s;
+        file.pop();
+
+        ///pour chaque successeur du sommet défilé
+        for(auto succ:m_sommets[s]->getAdjListe())
+        {
+            if (couleurs[succ] == 0)
+            {
+                couleurs[succ]=1;
+                preds[succ]=s;
+                file.push(succ);
+            }                           ///s'il n'est pas marqué
+                                        ///on le marque
+                                        ///on note son prédecesseur (=le sommet défilé)
+                                        ///on le met dans la file
+        }
+    }
+    return preds;
+}
+
+
+/*recherche et affichage des composantes connexes*/
+void Graphe :: rechercher_afficher_CC()
+{
+    size_t num=0;
+    bool test;
+    int ncc=0;
+    ///pour noter les numéros de CC
+    std::vector<int> cc(m_sommets.size(),-1);
+    do{
+        cc[num]=num;
+        std::cout<<std::endl<<"composante connexe "<<ncc<<" : "<<num<<" ";
+        ncc++;
+        ///lancement d'un BFS sur le sommet num
+        std::vector<int> arbre_BFS=BFS(num);
+        ///affichage des sommets decouverts lors du parcours (ceux qui ont un predecesseur
+        for(size_t i=0;i<arbre_BFS.size();++i){
+            if ((i!=num)&&(arbre_BFS[i]!=-1)){
+                    cc[i]=num;
+                    //std::cout<<i<<" ";
+            }
+        }
+        ///recherche d'un sommet non exploré
+        ///pour relancer un BFS au prochain tour
+        test=false;
+        for(size_t i=0;i<m_sommets.size();++i){
+            if (cc[i]==-1){
+                num=i;
+                test=true;
+                break;
+            }
+        }
+    }while(test==true);
+    std::cout<<std::endl;
+}
 
 
 

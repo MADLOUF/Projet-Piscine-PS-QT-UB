@@ -40,6 +40,9 @@ class Graphe
         void AlgoDijkstra(int SomInit,int Somfinal);
         void Cd();
         void Cvp();
+        void Cp();
+        void rechercher_afficher_CC();
+        std::vector<int> BFS(int num_s0)const;
 
 };
 
