@@ -39,7 +39,7 @@ class Graphe
         int NmbrAdjNonmarque(int ID);
         void setPPL(int PPL);
         int getPPL();
-        void MemeLong(int Somfinal)
+        void MemeLong(int Somfinal);
         void AlgoDijkstra(int SomInit,int Somfinal);
         void DijkstraModif(int SomInit,int Somfinal);
         void Cd();
