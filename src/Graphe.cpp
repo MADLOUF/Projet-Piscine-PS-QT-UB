@@ -378,15 +378,7 @@ void Graphe::Cp()
         Somme = Somme + AlgoDijkstra(SomDepart,SomFin);
     }
 
-    for(int i=0 ; i<getOrdre() ; i++)
-    {
-        if(m_sommets[i]->getDegre()> compteur)
-        {
-            compteur = m_sommets[i]->getDegre();
-        }
-
-    }
-    DegMax = compteur;
+    DegMax = getOrdre()-1;
 
     for(int i=0 ; i<getOrdre() ; i++)
     {
