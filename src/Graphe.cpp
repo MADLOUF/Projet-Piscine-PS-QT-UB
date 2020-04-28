@@ -705,7 +705,7 @@ void Graphe::Cp()
      }
      C=((double)getOrdre()-1)/Somme;
      Somme=0;
-     m_sommet[i]->setCp(C);
+     m_sommets[i]->setCp(C);
 
     }
 
