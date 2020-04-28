@@ -269,26 +269,30 @@ void Graphe::AlgoDijkstra(int SomInit,int Somfinal)
 
 void Graphe::Cd()
 {
-    int compteur = 0;
-    int Degmax=0;
-    int indice = 0;
 
+    double indice = 0;
     for (int i=0; i<getOrdre() ; i++)
     {
 
-        if(m_sommets[i]->getDegre()> compteur)
-        {
-            compteur = m_sommets[i]->getDegre();
-        }
+        indice = double(m_sommets[i]->getDegre())/(getOrdre()-1);
+        std::cout<<indice<<std::endl;
+        m_sommets[i]->setCd(indice);
+        std::cout<<m_sommets[i]->getCd()<<std::endl;
+
 
     }
-    Degmax = compteur;
 
-    for (int i=0; i<getOrdre() ; i++)
+}
+
+void Graphe::afficher_Cd()
+{
+    Cd();
+    std::cout<<std::endl;
+    std::cout<<"Indice de centralit\202 par sommet :"<<std::endl;
+    std::cout<<std::endl;
+    for(size_t i=0;i<m_sommets.size();i++)
     {
-
-        indice = (m_sommets[i]->getDegre())/(Degmax - 1);
-        m_sommets[i]->setCd(indice);
+        std::cout<<"Sommet "<<i<<": "<<m_sommets[i]->getCd()<<std::endl;
 
     }
 
@@ -344,7 +348,7 @@ void Graphe::afficherGraphe()
     Svgfile svgout;
         ///placer les sommets
 
-        for(int i=0; i<m_sommets.size();i++)
+        for(size_t i=0; i<m_sommets.size();i++)
         {
             svgout.addDisk(m_sommets[i]->getX()*100 , m_sommets[i]->getY()*100, 5, "blue");
             ///afficher les lettres
@@ -356,7 +360,7 @@ void Graphe::afficherGraphe()
         ///placer les arretes
         int s1, s2;
 
-        for(int i=0; i<m_arretes.size();i++)
+        for(size_t i=0; i<m_arretes.size();i++)
         {
             s1 = m_arretes[i]->getID1();
             s2 = m_arretes[i]->getID2();

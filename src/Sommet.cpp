@@ -62,7 +62,7 @@ int Sommet::getCvp() const
 {
     return m_Cvp;
 }
-int Sommet::getCd() const
+double Sommet::getCd() const
 {
     return m_Cd;
 }
@@ -78,7 +78,7 @@ void Sommet::setMarquage(int coul)
 {
     m_marquage=coul;
 }
-void Sommet::setCd(int C)
+void Sommet::setCd(double C)
 {
     m_Cd=C;
 }

@@ -46,6 +46,7 @@ class Graphe
         void Cvp();
         void Cp();
         void vulnerabilite();
+        void afficher_Cd();
         void rechercher_afficher_CC();
         std::vector<int> BFS(int num_s0)const;
 

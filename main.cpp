@@ -37,7 +37,7 @@ int main()
     do{
         choix = menu();
         switch(choix){
-            case '1' :
+            case '1' :  graphe.afficher_Cd();
                         graphe.rechercher_afficher_CC();
                         break;
 
