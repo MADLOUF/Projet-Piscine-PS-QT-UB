@@ -90,11 +90,11 @@ void Sommet::setC(double C)
 {
     m_C=C;
 }
-double Sommet::getCp()
+double Sommet::getCp() const
 {return m_Cp;}
 void Sommet::setCp(double C)
 {m_Cp=C;}
-double Sommet::getCi()
+double Sommet::getCi() const
 {return m_Ci;}
 void Sommet::setCi(double C)
 {m_Ci=C;}
