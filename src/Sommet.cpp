@@ -90,6 +90,14 @@ void Sommet::setC(double C)
 {
     m_C=C;
 }
+double Sommet::getCp()
+{return m_Cp;}
+void Sommet::setCp(double C)
+{m_Cp=C;}
+double Sommet::getCi()
+{return m_Ci;}
+void Sommet::setCi(double C)
+{m_Ci=C;}
 void Sommet::Adjtrie()
 {
             struct myclass

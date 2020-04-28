@@ -672,3 +672,42 @@ for(int i=0;i<getOrdre();i++)
 
 
 }
+
+void Graphe::Cp()
+{
+    double Somme=0;
+    double Dij=0;///Distance entre les sommets I et J
+    double C=0;
+    std::vector<std::vector<int>> PCChemins;
+    for(int i=0;i<getOrdre();i++)///Parcours de la totalité des sommets du graphe
+    {
+     for(int y =0;y<getOrdre();y++)
+     {
+         if (y==i)///Y=/=i
+         {
+             if(y==getOrdre()-1)
+             {
+                 break;
+             }
+             else
+             {
+                 y++;
+             }
+         }
+         PCChemins=DijkstraModif(i,y);///On recupere le trajet du plus court chemin avec la longueur situé en 0
+         Dij=PCChemins[0][0];
+         std::cout<<"i :"<<i<<" y: "<<y<<"Longueur :"<<PCChemins[0][0]<<std::endl;
+         PCChemins.clear();
+         Somme=Somme+Dij;
+         Dij=0;
+
+
+     }
+     C=((double)getOrdre()-1)/Somme;
+     Somme=0;
+     m_sommet[i]->setCp(C);
+
+    }
+
+
+}
