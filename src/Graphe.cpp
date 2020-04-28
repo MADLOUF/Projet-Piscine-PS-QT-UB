@@ -672,10 +672,7 @@ for(int i=0;i<getOrdre();i++)
 
 
 }
-double Graphe::getCp()
-{return m_Cp;}
-void Graphe::setCp(double C)
-{m_Cp=C;}
+
 void Graphe::Cp()
 {
     double Somme=0;
