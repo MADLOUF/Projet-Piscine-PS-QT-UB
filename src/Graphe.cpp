@@ -468,6 +468,85 @@ void Graphe :: rechercher_afficher_CC()
     }while(test==true);
     std::cout<<std::endl;
 }
+   void Graphe::setPPL(int PPL)
+        {
+            m_PPLongueur=PPL;
+        }
+        int Graphe::getPPL()
+        {
+            return m_PPLongueur;
+        }
+        void Graphe::MemeLong(int Somfinal)
+        {
+            for(size_t i=0 ;i<m_parcours.size();++i)
+            {
+                if(m_parcours[i][0]==getPPL()&&m_parcours[i][m_parcours[i].size()-1]==Somfinal)
+                {
+                    m_parcours[i][1]=1;
+                }
+            }
+        }
+
+void Graphe::DijkstraModif(int SomInit,int Somfinal)
+{
+     std::cout<<std::endl;
+            int Som=SomInit;
+            int EtapeCompteur =1;
+            std::vector<std::vector<int>> PlusCourtChemins;
+            m_sommets[Som]->setMarquage(1);/// On marque le sommet de départ
+            std::vector<int> stock;
+            std::vector<int> stock2;
+            stock.push_back(0);///On initialise la case de longueur à 0
+            stock.push_back(0);///Bool pour savoir si le parcours à deja ete utilisé
+            stock.push_back(Som);///On met le sommet de départ
+            m_parcours.push_back(stock);///Le sommet est à une longueur 0 de lui meme
+            int NumParcours=0;
+
+            while(m_sommets[rechercheID(Somfinal)]->getMarquage()==0)
+            {
+               // std::cout<<"Etape N :"<<EtapeCompteur<<std::endl;
+                ///Preparation à l'actualisation des sommets
+                stock.clear();
+                stock=m_parcours[NumParcours];
+                stock2=stock;
+                m_parcours[NumParcours].clear();
+                m_parcours.erase(m_parcours.begin()+NumParcours);
+
+
+
+                for (int i =0;i<m_sommets[rechercheID(Som)]->getDegre();++i) ///Parcours de la totalité des sommets adjacents
+                {
+                    stock.clear();
+                    stock=stock2;
+                    if(m_sommets[rechercheID(m_sommets[Som]->getAdj(i))]->getMarquage()==0)///On sélectionne les sommets adj uniquement non-marqué
+                    {
+                        stock.push_back(m_sommets[Som]->getAdj(i));///Rajout des sommets ADJ au chemin
+                        stock[0]=stock[0]+PoidsArrete(stock[stock.size()-2],stock[stock.size()-1]);
+                        m_parcours.push_back(stock);///Ajout du chemin à la liste des chemins
+                    }
+                }
+                for (size_t i=0;i<m_parcours.size();++i)
+                {
+
+                    std::cout<<" Num :"<< i <<" longueur :"<<m_parcours[i][0]<<" Parcours :";
+
+                    for(size_t y =2; y<m_parcours[i].size();++y)
+                    {
+                       std::cout <<"->"<<m_parcours[i][y];
+                    }
+                    std::cout<<std::endl;
+                }
+                NumParcours=PlusPetiteLongueur(m_parcours);///On recupere le parcours avec la plus petite longueur
+                std::cout<<"Numero du parcours"<<NumParcours<<std::endl;
+                Som=m_parcours[NumParcours][m_parcours[NumParcours].size()-1];///On recupere le dernier sommet de ce parcours et on le marque
+                m_sommets[Som]->setMarquage(1);
+                EtapeCompteur++;
+
+                if(m_sommets[rechercheID(Somfinal)]->getMarquage()==1)
+                {
+                    setPPL(m_parcours[IDParcours(Somfinal)][0]);
+                    MemeLong(rechercheID(Somfinal));
+                }
 
 void Graphe::vulnerabilite()
 {
@@ -504,3 +583,26 @@ void Graphe::vulnerabilite()
 
 
 
+
+            }
+            //////AFFICHAGE//////
+            std::cout <<" L'algorithme de Dijkstra donne le plus court chemin pour aller du sommet "<<SomInit<<" au sommet "<<Somfinal<<" :"<<std::endl;
+
+            for (size_t y=0;y<m_parcours.size();y++)
+            {
+                if(m_parcours[y][1]==1)
+                {
+                        for(size_t i=2;i<m_parcours[y].size();++i)
+                        {
+                            std::cout<<" ->"<<m_parcours[y][i];
+                        }
+                        std::cout<<std::endl;
+                }
+
+                }
+            std::cout<<std::endl;
+            std::cout<<"Chemin(s) de Longueur : "<<m_parcours[IDParcours(Somfinal)][0]<<std::endl;
+            std::cout<<std::endl;
+
+
+}

@@ -20,7 +20,7 @@ class Graphe
         std::vector<Sommet*> m_sommets;
         std::vector<Arrete*> m_arretes;
         std::vector<std::vector<int>> m_parcours;
-        std::vector<int> m_longueur;
+        int m_PPLongueur=99999;
 
     public:
 
@@ -29,7 +29,7 @@ class Graphe
         int getOrdre() const;
         int getTaille() const;
         void DeterminerAdjacance();
-        int rechercheID(int ID);///Inutile ??? Car les ID représente la position du sommet dans le vecteur.
+        int rechercheID(int ID);///Inutile ??? Car les ID reprÃ©sente la position du sommet dans le vecteur.
         int PoidsArrete(int ID1,int ID2);
         int TotalCouleur();
         void afficherAdjacance();
@@ -37,7 +37,11 @@ class Graphe
         int PlusPetiteLongueur(std::vector<std::vector<int>> parcours);
         int IDParcours(int somFinal);
         int NmbrAdjNonmarque(int ID);
+        void setPPL(int PPL);
+        int getPPL();
+        void MemeLong(int Somfinal);
         void AlgoDijkstra(int SomInit,int Somfinal);
+        void DijkstraModif(int SomInit,int Somfinal);
         void Cd();
         void Cvp();
         void Cp();
