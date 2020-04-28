@@ -529,8 +529,7 @@ void Graphe::MemeLong(int Somfinal)
 
 void Graphe::DijkstraModif(int SomInit,int Somfinal)
 {
-     std::cout<<std::endl;
-            int Som=SomInit;
+     int Som=SomInit;
             int EtapeCompteur =1;
             std::vector<std::vector<int>> PlusCourtChemins;
             m_sommets[Som]->setMarquage(1);/// On marque le sommet de départ
@@ -565,7 +564,7 @@ void Graphe::DijkstraModif(int SomInit,int Somfinal)
                         m_parcours.push_back(stock);///Ajout du chemin à la liste des chemins
                     }
                 }
-                for (size_t i=0;i<m_parcours.size();++i)
+                /*for (size_t i=0;i<m_parcours.size();++i)
                 {
 
                     std::cout<<" Num :"<< i <<" longueur :"<<m_parcours[i][0]<<" Parcours :";
@@ -575,9 +574,9 @@ void Graphe::DijkstraModif(int SomInit,int Somfinal)
                        std::cout <<"->"<<m_parcours[i][y];
                     }
                     std::cout<<std::endl;
-                }
+                }*/
                 NumParcours=PlusPetiteLongueur(m_parcours);///On recupere le parcours avec la plus petite longueur
-                std::cout<<"Numero du parcours"<<NumParcours<<std::endl;
+               // std::cout<<"Numero du parcours"<<NumParcours<<std::endl;
                 Som=m_parcours[NumParcours][m_parcours[NumParcours].size()-1];///On recupere le dernier sommet de ce parcours et on le marque
                 m_sommets[Som]->setMarquage(1);
                 EtapeCompteur++;
@@ -588,25 +587,31 @@ void Graphe::DijkstraModif(int SomInit,int Somfinal)
                     MemeLong(rechercheID(Somfinal));
                 }
 
+
+
+
             }
             //////AFFICHAGE//////
-            std::cout <<" L'algorithme de Dijkstra donne le plus court chemin pour aller du sommet "<<SomInit<<" au sommet "<<Somfinal<<" :"<<std::endl;
+           /*std::cout <<"Plus court chemin pour aller du sommet "<<SomInit<<" au sommet "<<Somfinal<<" :";*/
 
             for (size_t y=0;y<m_parcours.size();y++)
             {
                 if(m_parcours[y][1]==1)
                 {
+                    PlusCourtChemins.push_back(m_parcours[y]);
                         for(size_t i=2;i<m_parcours[y].size();++i)
                         {
-                            std::cout<<" ->"<<m_parcours[y][i];
+                            //std::cout<<" ->"<<m_parcours[y][i];
                         }
                         std::cout<<std::endl;
                 }
-
                 }
-            std::cout<<std::endl;
-            std::cout<<"Chemin(s) de Longueur : "<<m_parcours[IDParcours(Somfinal)][0]<<std::endl;
-            std::cout<<std::endl;
+           // std::cout<<"Longueur : "<<m_parcours[IDParcours(Somfinal)][0]<<std::endl;
+            m_parcours.clear();
+            for(size_t i=0;i<getOrdre();++i)
+            {
+                m_sommets[i]->setMarquage(0);
+            }
 
-
+            return PlusCourtChemins;
 }
