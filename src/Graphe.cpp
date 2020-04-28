@@ -527,7 +527,7 @@ void Graphe::MemeLong(int Somfinal)
     }
 }
 
-void Graphe::DijkstraModif(int SomInit,int Somfinal)
+std::vector<std::vector<int>> Graphe::DijkstraModif(int SomInit,int Somfinal)
 {
      int Som=SomInit;
             int EtapeCompteur =1;
@@ -614,4 +614,46 @@ void Graphe::DijkstraModif(int SomInit,int Somfinal)
             }
 
             return PlusCourtChemins;
+}
+void Graphe::Ci()
+{
+    double n_pccI=0;
+ double n_pccJK=0;
+ double Somme=0;
+ double C=0;
+ int compteur =0;
+ std::vector<std::vector<int>> PCChemins;
+for(int i=0;i<getOrdre();i++)
+{
+
+ std::cout<<"I: " <<i<<std::endl;
+   for (int j=0;j<=(getOrdre()-2);++j)///Fonctionne uniquement si l'ID des sommets commence par 0
+    {
+        for (int k=1+j;k<=getOrdre()-1;++k)
+        {
+            std::cout<<"j :"<<j<<" k : "<<k<<std::endl;;
+            PCChemins=DijkstraModif(j,k);
+            for(size_t x=0;x<PCChemins.size();x++)
+            {
+                for(size_t y=2;y<PCChemins[x].size();y++)
+                {
+                    if(PCChemins[x][y]==i)
+                    {
+                        n_pccI++;
+                    }
+                }
+            }
+            n_pccJK=PCChemins.size();
+            Somme=Somme+(n_pccI/n_pccJK);
+            n_pccJK=0;
+            n_pccI=0;
+            PCChemins.clear();
+        }
+    }
+
+    C=(2*Somme)/(pow((double)getOrdre(),2.0)-(3*(double)getOrdre())+2);
+    Somme=0;
+}
+
+
 }
