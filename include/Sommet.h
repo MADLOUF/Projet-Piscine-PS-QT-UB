@@ -22,6 +22,8 @@ class Sommet
         double m_Cd=0;
         double m_C=0;
         double m_Cvp=1;
+        double m_Ci=0;
+        double m_Cp=0;
     public:
         Sommet(std::istream& is);
         int getDegre() const;
@@ -34,6 +36,8 @@ class Sommet
         double getC()const;
         double getCvp()const;
         double getCd()const;
+        double getCi()const;
+        double getCp()const;
         std::string getNom () const;
         void Adjacent(int ID);
         void Erase_Adjacent();
@@ -41,6 +45,8 @@ class Sommet
         void setCd(double C);
         void setCvp(double C);
         void setC(double C);
+        void setCi(double C);
+        void setCp(double C);
         void Adjtrie();
         void afficherAdj();
 
