@@ -20,7 +20,6 @@ class Graphe
         std::vector<Sommet*> m_sommets;
         std::vector<Arrete*> m_arretes;
         std::vector<std::vector<int>> m_parcours;
-        std::vector<int> m_longueur;
         int m_PPLongueur=99999;
 
     public:
