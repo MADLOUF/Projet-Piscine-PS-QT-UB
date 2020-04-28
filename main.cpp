@@ -38,6 +38,7 @@ int main()
         choix = menu();
         switch(choix){
             case '1' :  graphe.afficher_Cd();
+                        graphe.afficher_Cvp();
                         graphe.rechercher_afficher_CC();
                         break;
 

@@ -275,9 +275,8 @@ void Graphe::Cd()
     {
 
         indice = double(m_sommets[i]->getDegre())/(getOrdre()-1);
-        std::cout<<indice<<std::endl;
         m_sommets[i]->setCd(indice);
-        std::cout<<m_sommets[i]->getCd()<<std::endl;
+
 
 
     }
@@ -288,7 +287,7 @@ void Graphe::afficher_Cd()
 {
     Cd();
     std::cout<<std::endl;
-    std::cout<<"Indice de centralit\202 par sommet :"<<std::endl;
+    std::cout<<"Indice de centralit\202 de degr\202 par sommet :"<<std::endl;
     std::cout<<std::endl;
     for(size_t i=0;i<m_sommets.size();i++)
     {
@@ -300,15 +299,17 @@ void Graphe::afficher_Cd()
 
 void Graphe::Cvp()
 {
-    int L=0;///Lambda
-    int L2=10;
+    double L=0;///Lambda
+    double L2=1;
+    double L3=-1;
     int C=0;
-    int Somme=0;
+    double Somme=0;
     std::vector<int> ListeADJ;
-    while(L<-L2 && L>L2)
+    while(L2>=L || L>L3)
    {
-      L2=L;
-      L=0;
+      L2=L-0.01;
+      L3=L+0.01;
+
     for(int i =0;i<getOrdre();++i)///Faire la somme des indices de ses voisins
     {
         C=0;
@@ -319,6 +320,7 @@ void Graphe::Cvp()
         }
         ListeADJ.clear();///On renitialise la liste d'adjacance pr les prochains sommets
         C=Somme;
+        std::cout<<"somme : "<<Somme<<std::endl;
         m_sommets[i]->setC(C);
     }
 
@@ -340,7 +342,20 @@ void Graphe::Cvp()
    }
 
 }
+void Graphe::afficher_Cvp()
+{
+    Cvp();
+    std::cout<<std::endl;
+    std::cout<<"Indice de centralit\202 de vecteur propre par sommet :"<<std::endl;
+    std::cout<<std::endl;
+    for(size_t i=0;i<m_sommets.size();i++)
+    {
+        std::cout<<"Sommet "<<i<<": "<<m_sommets[i]->getCvp()<<std::endl;
 
+    }
+
+
+}
 
 
 void Graphe::afficherGraphe()
