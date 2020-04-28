@@ -623,7 +623,7 @@ std::vector<std::vector<int>> Graphe::DijkstraModif(int SomInit,int Somfinal)
                 }
            // std::cout<<"Longueur : "<<m_parcours[IDParcours(Somfinal)][0]<<std::endl;
             m_parcours.clear();
-            for(size_t i=0;i<getOrdre();++i)
+            for(int i=0;i<getOrdre();++i)
             {
                 m_sommets[i]->setMarquage(0);
             }
@@ -633,16 +633,15 @@ std::vector<std::vector<int>> Graphe::DijkstraModif(int SomInit,int Somfinal)
 void Graphe::Ci()
 {
     double n_pccI=0;
- double n_pccJK=0;
- double Somme=0;
- double C=0;
- int compteur =0;
- std::vector<std::vector<int>> PCChemins;
-for(int i=0;i<getOrdre();i++)
-{
+    double n_pccJK=0;
+    double Somme=0;
+    double C=0;
+    std::vector<std::vector<int>> PCChemins;
+    for(int i=0;i<getOrdre();i++)
+    {
 
- std::cout<<"I: " <<i<<std::endl;
-   for (int j=0;j<=(getOrdre()-2);++j)///Fonctionne uniquement si l'ID des sommets commence par 0
+        std::cout<<"I: " <<i<<std::endl;
+    for (int j=0;j<=(getOrdre()-2);++j)///Fonctionne uniquement si l'ID des sommets commence par 0
     {
         for (int k=1+j;k<=getOrdre()-1;++k)
         {
@@ -667,6 +666,7 @@ for(int i=0;i<getOrdre();i++)
     }
 
     C=(2*Somme)/(pow((double)getOrdre(),2.0)-(3*(double)getOrdre())+2);
+    m_sommets[i]->setCi(C);
     Somme=0;
 }
 
