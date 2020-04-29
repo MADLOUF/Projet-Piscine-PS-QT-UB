@@ -840,7 +840,7 @@ void Graphe::Save()
     if(monFlux)
     {
         monFlux << "ID    Cd         Cvp          Cp         Ci"<<std::endl;
-        for(size_t i=0;i<getOrdre();i++)
+        for(int i=0;i<getOrdre();i++)
         {
 
             monFlux << m_sommets[i]->getID()<<"     "<<  m_sommets[i]->getCd() <<"     "<< m_sommets[i]->getCvp();

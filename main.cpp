@@ -34,7 +34,9 @@ int main()
     Graphe graphe;
     char choix;
     bool quit = 0;
+
     int test=0;
+
     std::string nomFichier1;
     std::string nomFichier2;
 
