@@ -34,8 +34,11 @@ int main()
     Graphe graphe;
     char choix;
     bool quit = 0;
+<<<<<<< HEAD
     int test=0;
     std::string nomFichier1;
+=======
+>>>>>>> 0827701a690069a0fb4c53429481fbed10426b20
     std::string nomFichier2;
 
 

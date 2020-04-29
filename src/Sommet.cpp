@@ -82,6 +82,10 @@ void Sommet::setCd(double C)
 {
     m_Cd=C;
 }
+void Sommet::setCdnn(double C)
+{
+    m_Cdnn=C;
+}
 void Sommet::setCvp(double C)
 {
     m_Cvp=C;
@@ -91,13 +95,37 @@ void Sommet::setC(double C)
     m_C=C;
 }
 double Sommet::getCp() const
-{return m_Cp;}
+{
+    return m_Cp;
+}
+double Sommet::getCpnn() const
+{
+    return m_Cpnn;
+}
 void Sommet::setCp(double C)
-{m_Cp=C;}
+{
+    m_Cp=C;
+}
+void Sommet::setCpnn(double C)
+{
+    m_Cpnn=C;
+}
 double Sommet::getCi() const
-{return m_Ci;}
+{
+    return m_Ci;
+}
+double Sommet::getCinn() const
+{
+    return m_Cinn;
+}
 void Sommet::setCi(double C)
-{m_Ci=C;}
+{
+    m_Ci=C;
+}
+void Sommet::setCinn(double C)
+{
+    m_Cinn=C;
+}
 void Sommet::Adjtrie()
 {
             struct myclass
