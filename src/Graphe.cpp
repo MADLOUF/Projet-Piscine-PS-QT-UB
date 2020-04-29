@@ -63,18 +63,6 @@ void Graphe::CreerGraphe(std::string nomFichier)
 
 void Graphe::EffacerGraphe()
 {
-    /*
-    for(auto i : m_sommets)///supprime les objets sommets
-        delete i;
-    while(!m_sommets.empty())///supprime les cases des vecteurs
-        m_sommets.erase(m_sommets.begin());
-    for(auto i : m_arretes)
-        delete i;
-    while(!m_arretes.empty())
-        m_arretes.erase(m_arretes.begin());
-*/
-
-
 
 
     for(int i=0;i<getOrdre();++i)   ///suppression des sommet et adjacents
@@ -833,7 +821,7 @@ void Graphe::Save()
 
     if(monFlux)
     {
-        monFlux << "ID    Cd         Cvp         Ci        Ci"<<std::endl;
+        monFlux << "ID    Cd         Cvp          Cp         Ci"<<std::endl;
         for(size_t i=0;i<getOrdre();i++)
         {
 
