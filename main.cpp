@@ -61,9 +61,16 @@ int main()
 
                         break;
 
-            case '3' :  graphe.vulnerabilite();
+            case '3' :  graphe.Cd();
+                        graphe.Cvp();
+                        if(graphe.getPondere()==1)
+                        {
+                            graphe.Cp();
+                            graphe.Ci();
+                        }
+                        graphe.Save();
                         break;
-            case '4' :
+            case '4' :  graphe.vulnerabilite();
                         break;
 
             case '5' :  std::cout<<std::endl;

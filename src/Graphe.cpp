@@ -357,7 +357,7 @@ void Graphe::Cvp()
 		   }
 		 C=Somme;
 		 m_sommets[i]->setC(C);
-		 std::cout<<"  C ="<<m_sommets[i]->getC()<<std::endl;
+		 //std::cout<<"  C ="<<m_sommets[i]->getC()<<std::endl;
 		 ListeADJ.clear();
 	  }
 
@@ -779,20 +779,40 @@ std::vector<std::vector<int>> Graphe::DijkstraModif(int SomInit,int Somfinal)
 
 void Graphe::Save()
 {
+    int test=0;
     std::string const save("D:/ECE 19-20/Informatique/C++/Projet-Piscine-PS-QT-UB/Sauvegarde.txt");
     std::ofstream monFlux(save.c_str());
 
     if(monFlux)
     {
-        monFlux << "ID    Cd     Cvp     Ci    Ci"<<std::endl;
+        monFlux << "ID    Cd         Cvp         Ci        Ci"<<std::endl;
         for(size_t i=0;i<getOrdre();i++)
         {
 
-            monFlux << m_sommets[i]->getID() <<  m_sommets[i]->getCd() << m_sommets[i]->getCvp() << m_sommets[i]->getCp() << m_sommets[i]->getCi() << std::endl;
+            monFlux << m_sommets[i]->getID()<<"     "<<  m_sommets[i]->getCd() <<"     "<< m_sommets[i]->getCvp();
+            if(getPondere()==1)
+            {
+                monFlux <<"     "<< m_sommets[i]->getCp() <<"     "<< m_sommets[i]->getCi() <<std::endl;
+            }
+            else
+            {
+                monFlux<<std::endl;
+                test=1;
+
+            }
 
 
         }
+        if(test==1)
+        {
+                std::cout<<std::endl;
+                std::cout<<"La ponderation n'est pas charg\202e ! Vous ne pouvez pas sauvegarder Cp et Ci"<<std::endl;
+                std::cout<<std::endl;
+        }
 
+        std::cout<<std::endl;
+        std::cout<<"Vous avez sauvegard\202 vos indices avec succes"<<std::endl;
+        std::cout<<std::endl;
     }
     else
     {
