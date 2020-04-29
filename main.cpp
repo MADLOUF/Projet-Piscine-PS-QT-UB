@@ -15,13 +15,16 @@ char menu()
     std::cout<<"5. Tester la vuln\202rabilit\202 du r\202seau"<<std::endl;
     std::cout<<"6. Charger la ponderation"<<std::endl;
     std::cout<<"7. Desactiver la ponderation"<<std::endl;
+    std::cout<<"8. Activer les indices des sommets"<<std::endl;
+    std::cout<<"9. Desactiver les indices des sommets"<<std::endl;
+
 
 
 
     do
     {
         std::cin>>choix;
-    }while(choix != '1' && choix != '2' && choix != '3'&& choix != '4'&& choix != '5'&& choix != '6'&& choix != '7');
+    }while(choix != '1' && choix != '2' && choix != '3' && choix != '4' && choix != '5' && choix != '6' && choix != '7' && choix!= '8'&& choix!= '9');
 
     return choix;
 }
@@ -44,6 +47,7 @@ int main()
     do{
         choix = menu();
         switch(choix){
+
             case '1' :  std::cout<<std::endl;
                         std::cout<<"Rentrez le nom du graphe a charger"<<std::endl;
                         std::cin>>nomFichier1;
@@ -92,8 +96,29 @@ int main()
                         graphe.setPondere(1);
                         std::cout<<"La ponderation a bien \202t\202 charg\202 ! Afficher le graphe pour la voir."<<std::endl;
                         break;
+
             case '7' :  graphe.setPondere(0);
+                        std::cout<<std::endl;
+                        std::cout<<"Ponderation enlev\202e"<<std::endl;
+                        std::cout<<std::endl;
                         break;
+
+            case '8' :  graphe.Cd();
+                        graphe.Cvp();
+                        if(graphe.getPondere()==1)
+                        {
+                            graphe.Cp();
+                            graphe.Ci();
+                        }
+                        graphe.setIndice(1);
+                        break;
+
+            case '9' :  graphe.setIndice(0);
+                        std::cout<<std::endl;
+                        std::cout<<"Indices enlev\202e"<<std::endl;
+                        std::cout<<std::endl;
+                        break;
+
             default :   printf("Ne fonctionne pas \n");
 
                         break;

@@ -20,6 +20,7 @@ Graphe::Graphe()
 void Graphe::CreerGraphe(std::string nomFichier)
 {
     setPondere(0); ///ne pas mettre la ponderation au debut du graphe
+    setIndice(0); ///ne pas mettre les indices des le debut
     std::ifstream ifs{nomFichier};
             if (!ifs)
                 throw std::runtime_error( "Impossible d'ouvrir en lecture " + nomFichier );
@@ -132,6 +133,16 @@ int Graphe::getPondere() const
 void Graphe::setPondere(bool test)
 {
     m_pondere=test;
+}
+
+int Graphe::getIndice() const
+{
+    return m_indice;
+}
+
+void Graphe::setIndice(bool test)
+{
+    m_indice=test;
 }
 
 
@@ -564,8 +575,6 @@ void Graphe::afficherGraphe()
             svgout.addDisk(m_sommets[i]->getX()*100 , m_sommets[i]->getY()*100, 5, "blue");
             ///afficher les lettres
             svgout.addText(m_sommets[i]->getX()*100 , m_sommets[i]->getY()*100-5, m_sommets[i]->getNom(),"black" );
-
-
         }
 
         ///placer les arretes
@@ -587,6 +596,14 @@ void Graphe::afficherGraphe()
         else
             std::cout<<"Vous n'avez pas charg\202 la ponderation"<<std::endl;
 
+        ///affiche indice si activé
+        if(getIndice()==1)
+        {
+            afficherIndices(svgout);
+        }
+        else
+            std::cout<<"Vous n'avez pas charg\202 la ponderation"<<std::endl;
+
 }
 
 void Graphe::afficherPonderation(Svgfile &svgout)
@@ -601,6 +618,26 @@ void Graphe::afficherPonderation(Svgfile &svgout)
             s1 = m_arretes[i]->getID1();
             s2 = m_arretes[i]->getID2();
             svgout.addText((m_sommets[s1]->getX()*100+ m_sommets[s2]->getX()*100)/2-30, (m_sommets[s1]->getY()*100+ m_sommets[s2]->getY()*100)/2, m_arretes[i]->getPoids(),"red" );
+        }
+
+}
+
+void Graphe::afficherIndices(Svgfile &svgout)
+{
+
+
+        for(size_t i=0; i<m_sommets.size();i++)
+        {
+
+            ///afficher les indices par sommet
+            svgout.addText(m_sommets[i]->getX()*100-30, m_sommets[i]->getY()*100+10, m_sommets[i]->getCd(),"purple" );
+            svgout.addText(m_sommets[i]->getX()*100-30, m_sommets[i]->getY()*100+27, m_sommets[i]->getCvp(),"purple" );
+
+            if(getPondere()==1)
+            {
+                svgout.addText(m_sommets[i]->getX()*100-30, m_sommets[i]->getY()*100+44, m_sommets[i]->getCp(),"purple" );
+                svgout.addText(m_sommets[i]->getX()*100-30, m_sommets[i]->getY()*100+61, m_sommets[i]->getCi(),"purple" );
+            }
         }
 
 }
@@ -873,6 +910,7 @@ void Graphe::Save()
         std::cout << "ERREUR: Impossible d'ouvrir le fichier." << std::endl;
     }
 }
+
 void Graphe::comparaison()
 {
     std::cout<<" Comparaison des indices de centralite avant et apres la suppression d'aretes :"<<std::endl;

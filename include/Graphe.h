@@ -24,6 +24,7 @@ class Graphe
         std::vector<std::vector<int>> m_parcours;
         int m_PPLongueur=99999;
         bool m_pondere;
+        bool m_indice;
 
     public:
 
@@ -35,6 +36,8 @@ class Graphe
         int getTaille() const;
         int getPondere() const;
         void setPondere(bool test);
+        int getIndice() const;
+        void setIndice(bool test);
         void DeterminerAdjacance();
         int rechercheID(int ID);///Inutile ??? Car les ID représente la position du sommet dans le vecteur.
         int PoidsArrete(int ID1,int ID2);
@@ -60,6 +63,7 @@ class Graphe
         void afficher_Ci();
         void rechercher_afficher_CC();
         void afficherPonderation(Svgfile &svg);
+        void afficherIndices(Svgfile &svg);
         std::vector<int> BFS(int num_s0)const;
         void Save();
         void Load_ponderation(std::string nomFichier);
