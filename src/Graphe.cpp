@@ -336,47 +336,53 @@ void Graphe::afficher_Cd()
 }
 
 void Graphe::Cvp()
-{
-    double L=0;///Lambda
-    double L2=1;
-    double L3=-1;
-    int C=0;
+{   double L=0;///Lambda
+    double L2=0;
+    double L3=1;///DeltaLambda
+    double C=0;
+	double Cvp=0;
     double Somme=0;
     std::vector<int> ListeADJ;
-    while(L2>=L || L>L3)
-   {
-      L2=L-0.01;
-      L3=L+0.01;
+    while(L3>=0.01)
+	{
 
-    for(int i =0;i<getOrdre();++i)///Faire la somme des indices de ses voisins
-    {
-        C=0;
-        ListeADJ=m_sommets[i]->getAdjListe();
-        for (int y=0;y<m_sommets[i]->getDegre();++y)
-        {
-            Somme=Somme+m_sommets[ListeADJ[y]]->getCvp();///Calcule de C=Somme(Cvp) des sommets adjacants
-        }
-        ListeADJ.clear();///On renitialise la liste d'adjacance pr les prochains sommets
-        C=Somme;
-        m_sommets[i]->setC(C);
-    }
+	  for(int i=0;i<getOrdre();++i)///Determination de  C
+	  {
+	      Somme=0;
+	      //std::cout<<"Sommet N: "<<i<<"  Cvp = "<<m_sommets[i]->getCvp();
+	       ListeADJ=m_sommets[i]->getAdjListe();
+		   for(int y=0;y<m_sommets[i]->getDegre();y++)
+		   {
+		     Somme=Somme+m_sommets[ListeADJ[y]]->getCvp();
+		   }
+		 C=Somme;
+		 m_sommets[i]->setC(C);
+		 std::cout<<"  C ="<<m_sommets[i]->getC()<<std::endl;
+		 ListeADJ.clear();
+	  }
 
-    Somme=0;
 
-    for(int i =0;i<getOrdre();++i)///Calculer Lambda = (Somme des C)^1/2
-    {
-       Somme=Somme+m_sommets[i]->getC();
-    }
+	  Somme=0;
+	  for(int i=0;i<getOrdre();++i)
+	  {
+	    Somme=Somme+pow(m_sommets[i]->getC(),2.0);
+	  }
 
-    L=pow(Somme,0.5);
-    Somme=0;
-
-    for(int i =0;i<getOrdre();++i)///Recalculer l'indice Cvp pour chaque sommet
-    {
-       m_sommets[i]->setCvp(m_sommets[i]->getC()/L);
-    }
-
-   }
+	  L2=L;
+	  L=pow(Somme,0.5);
+	  //std::cout<<"Lambda = "<<L<<std::endl<<std::endl;
+	  if(L2>=L)///Calcul de delta L
+      {L3=L2-L;}
+      else
+      {L3=L-L2;}
+	  for(int i=0;i<getOrdre();++i)
+	  {
+       C=m_sommets[i]->getC();
+	   Cvp=(C/L);
+	   m_sommets[i]->setCvp(Cvp);
+	   //std::cout<<"Sommet N: "<<i<<"  Cvp = "<<m_sommets[i]->getCvp()<<"  C ="<<m_sommets[i]->getC()<<std::endl;
+	  }
+	}
 
 }
 void Graphe::afficher_Cvp()
