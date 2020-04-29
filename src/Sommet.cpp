@@ -62,9 +62,17 @@ double Sommet::getCvp() const
 {
     return m_Cvp;
 }
+double Sommet::getCvp2() const
+{
+    return m_Cvp2;
+}
 double Sommet::getCd() const
 {
     return m_Cd;
+}
+double Sommet::getCd2() const
+{
+    return m_Cd2;
 }
 void Sommet::Adjacent(int ID)
 {
@@ -82,6 +90,10 @@ void Sommet::setCd(double C)
 {
     m_Cd=C;
 }
+void Sommet::setCd2(double C)
+{
+    m_Cd2=C;
+}
 void Sommet::setCdnn(double C)
 {
     m_Cdnn=C;
@@ -89,6 +101,10 @@ void Sommet::setCdnn(double C)
 void Sommet::setCvp(double C)
 {
     m_Cvp=C;
+}
+void Sommet::setCvp2(double C)
+{
+    m_Cvp2=C;
 }
 void Sommet::setC(double C)
 {
@@ -98,6 +114,10 @@ double Sommet::getCp() const
 {
     return m_Cp;
 }
+double Sommet::getCp2() const
+{
+    return m_Cp2;
+}
 double Sommet::getCpnn() const
 {
     return m_Cpnn;
@@ -105,6 +125,10 @@ double Sommet::getCpnn() const
 void Sommet::setCp(double C)
 {
     m_Cp=C;
+}
+void Sommet::setCp2(double C)
+{
+    m_Cp2=C;
 }
 void Sommet::setCpnn(double C)
 {
@@ -114,6 +138,10 @@ double Sommet::getCi() const
 {
     return m_Ci;
 }
+double Sommet::getCi2() const
+{
+    return m_Ci2;
+}
 double Sommet::getCinn() const
 {
     return m_Cinn;
@@ -121,6 +149,10 @@ double Sommet::getCinn() const
 void Sommet::setCi(double C)
 {
     m_Ci=C;
+}
+void Sommet::setCi2(double C)
+{
+    m_Ci2=C;
 }
 void Sommet::setCinn(double C)
 {
