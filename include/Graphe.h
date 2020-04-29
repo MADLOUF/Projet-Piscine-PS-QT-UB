@@ -27,8 +27,10 @@ class Graphe
 
     public:
 
-        Graphe(std::string nomFichier);
+        Graphe();
         ~Graphe();
+        void CreerGraphe(std::string nomFichier);
+        void EffacerGraphe();
         int getOrdre() const;
         int getTaille() const;
         int getPondere() const;

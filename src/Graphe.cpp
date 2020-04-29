@@ -12,8 +12,14 @@
 #include <algorithm>
 #include <cmath>
 
-Graphe::Graphe(std::string nomFichier)
+Graphe::Graphe()
 {
+
+}
+
+void Graphe::CreerGraphe(std::string nomFichier)
+{
+    setPondere(0); ///ne pas mettre la ponderation au debut du graphe
     std::ifstream ifs{nomFichier};
             if (!ifs)
                 throw std::runtime_error( "Impossible d'ouvrir en lecture " + nomFichier );
@@ -53,6 +59,41 @@ Graphe::Graphe(std::string nomFichier)
                 {m_arretes.push_back( new Arrete{ifs} );}
                 std::cout<<std::endl;
                 DeterminerAdjacance();
+}
+
+void Graphe::EffacerGraphe()
+{
+    /*
+    for(auto i : m_sommets)///supprime les objets sommets
+        delete i;
+    while(!m_sommets.empty())///supprime les cases des vecteurs
+        m_sommets.erase(m_sommets.begin());
+    for(auto i : m_arretes)
+        delete i;
+    while(!m_arretes.empty())
+        m_arretes.erase(m_arretes.begin());
+*/
+
+
+
+
+    for(int i=0;i<getOrdre();++i)   ///suppression des sommet et adjacents
+    {
+        delete m_sommets[i];
+    }
+    for(int i=0;i<getTaille();++i)   ///suppression des arretes
+    {
+        delete m_arretes[i];
+    }
+    while(!m_sommets.empty())
+    {
+        m_sommets.erase(m_sommets.begin());
+    }
+    while(!m_arretes.empty())
+    {
+        m_arretes.erase(m_arretes.begin());
+    }
+
 }
 
 void Graphe::Load_ponderation(std::string nomFichier)
