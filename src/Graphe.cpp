@@ -55,6 +55,33 @@ Graphe::Graphe(std::string nomFichier)
                 DeterminerAdjacance();
 }
 
+void Graphe::Load_ponderation(std::string nomFichier)
+{
+    std::ifstream ifs{nomFichier};
+            if (!ifs)
+                throw std::runtime_error( "Impossible d'ouvrir en lecture " + nomFichier );
+            int taille;
+            ifs >> taille;
+            std::cout<<std::endl;
+            ///rien faire avec la taille?
+            int ID;
+            int poids;
+            for (int i=0; i<taille; ++i)
+            {
+                ifs>>ID;
+                ifs>>poids;
+                m_arretes[ID]->setPoids(poids);
+                std::cout<<std::endl;
+                if (!ifs)
+                throw std::runtime_error( "Probleme lecture poid arrete" );
+
+            }
+
+
+}
+
+
+
 Graphe::~Graphe()
 {
                 for (auto s : m_sommets)
@@ -68,6 +95,17 @@ int Graphe::getOrdre() const
 {
     return (int)m_arretes.size();
 }
+int Graphe::getPondere() const
+{
+    return m_pondere;
+}
+
+void Graphe::setPondere(bool test)
+{
+    m_pondere=test;
+}
+
+
  void Graphe::DeterminerAdjacance()
 {
     if(m_oriente==1)///Pour un graphe orienté
@@ -320,7 +358,6 @@ void Graphe::Cvp()
         }
         ListeADJ.clear();///On renitialise la liste d'adjacance pr les prochains sommets
         C=Somme;
-        std::cout<<"somme : "<<Somme<<std::endl;
         m_sommets[i]->setC(C);
     }
 
@@ -358,6 +395,119 @@ void Graphe::afficher_Cvp()
 }
 
 
+
+void Graphe::Cp()
+{
+    double Somme=0;
+    double Dij=0;///Distance entre les sommets I et J
+    double C=0;
+    std::vector<std::vector<int>> PCChemins;
+    for(int i=0;i<getOrdre();i++)///Parcours de la totalité des sommets du graphe
+    {
+     for(int y =0;y<getOrdre();y++)
+     {
+         if (y==i)///Y=/=i
+         {
+             if(y==getOrdre()-1)
+             {
+                 break;
+             }
+             else
+             {
+                 y++;
+             }
+         }
+         std::cout<<"test1"<<std::endl;
+         PCChemins=DijkstraModif(i,y);///On recupere le trajet du plus court chemin avec la longueur situé en 0
+         std::cout<<"test2"<<std::endl;
+         Dij=PCChemins[0][0];
+         std::cout<<"i :"<<i<<" y: "<<y<<"Longueur :"<<PCChemins[0][0]<<std::endl;
+         PCChemins.clear();
+         Somme=Somme+Dij;
+         Dij=0;
+
+
+     }
+     C=((double)getOrdre()-1)/Somme;
+     Somme=0;
+     std::cout<<"valeur : "<<C<<std::endl;
+     m_sommets[i]->setCp(C);
+
+    }
+
+}
+
+void Graphe::afficher_Cp()
+{
+    Cp();
+    std::cout<<std::endl;
+    std::cout<<"Indice de centralit\202 de proximit\202 par sommet :"<<std::endl;
+    std::cout<<std::endl;
+    for(size_t i=0;i<m_sommets.size();i++)
+    {
+        std::cout<<"Sommet "<<i<<": "<<m_sommets[i]->getCp()<<std::endl;
+
+    }
+
+
+}
+
+void Graphe::Ci()
+{
+    double n_pccI=0;
+    double n_pccJK=0;
+    double Somme=0;
+    double C=0;
+    std::vector<std::vector<int>> PCChemins;
+    for(int i=0;i<getOrdre();i++)
+    {
+
+        std::cout<<"I: " <<i<<std::endl;
+    for (int j=0;j<=(getOrdre()-2);++j)///Fonctionne uniquement si l'ID des sommets commence par 0
+    {
+        for (int k=1+j;k<=getOrdre()-1;++k)
+        {
+            std::cout<<"j :"<<j<<" k : "<<k<<std::endl;;
+            PCChemins=DijkstraModif(j,k);
+            for(size_t x=0;x<PCChemins.size();x++)
+            {
+                for(size_t y=2;y<PCChemins[x].size();y++)
+                {
+                    if(PCChemins[x][y]==i)
+                    {
+                        n_pccI++;
+                    }
+                }
+            }
+            n_pccJK=PCChemins.size();
+            Somme=Somme+(n_pccI/n_pccJK);
+            n_pccJK=0;
+            n_pccI=0;
+            PCChemins.clear();
+        }
+    }
+
+    C=(2*Somme)/(pow((double)getOrdre(),2.0)-(3*(double)getOrdre())+2);
+    m_sommets[i]->setCi(C);
+    Somme=0;
+}
+
+
+}
+
+void Graphe::afficher_Ci()
+{
+    Ci();
+    std::cout<<std::endl;
+    std::cout<<"Indice de centralit\202 de proximit\202 par sommet :"<<std::endl;
+    std::cout<<std::endl;
+    for(size_t i=0;i<m_sommets.size();i++)
+    {
+        std::cout<<"Sommet "<<i<<": "<<m_sommets[i]->getCi()<<std::endl;
+
+    }
+}
+
 void Graphe::afficherGraphe()
 {
     Svgfile svgout;
@@ -383,34 +533,33 @@ void Graphe::afficherGraphe()
             svgout.addText((m_sommets[s1]->getX()*100+ m_sommets[s2]->getX()*100)/2, (m_sommets[s1]->getY()*100+ m_sommets[s2]->getY()*100)/2, m_arretes[i]->getNumArrete(),"green" );
         }
 
-
+        ///affiche ponderation si activé
+        if(getPondere()==1)
+        {
+            afficherPonderation(svgout);
+        }
+        else
+            std::cout<<"Vous n'avez pas charg\202 la ponderation"<<std::endl;
 
 }
-/*
-void Graphe::Cp()
+
+void Graphe::afficherPonderation(Svgfile &svgout)
 {
-    int SomDepart;
-    int SomFin;
-    int indice = 0;
-    int DegMax = 0;
-    int compteur = 0;
-    int Somme = 0;
 
 
-    for(int i=0 ; i<getOrdre() ; i++)
-    {
-        Somme = Somme + AlgoDijkstra(SomDepart,SomFin);
-    }
+        ///placer les ponderations
+        int s1, s2;
 
-    DegMax = getOrdre()-1;
+        for(size_t i=0; i<m_arretes.size();i++)
+        {
+            s1 = m_arretes[i]->getID1();
+            s2 = m_arretes[i]->getID2();
+            svgout.addText((m_sommets[s1]->getX()*100+ m_sommets[s2]->getX()*100)/2-20, (m_sommets[s1]->getY()*100+ m_sommets[s2]->getY()*100)/2, m_arretes[i]->getNumArrete(),"red" );
+        }
 
-    for(int i=0 ; i<getOrdre() ; i++)
-    {
-        indice = (DegMax)/(Somme);
-        m_sommets[i]->setCp(indice);
-    }
 }
-*/
+
+
 std::vector<int> Graphe:: BFS(int num_s0)const
 {
 
@@ -544,170 +693,103 @@ void Graphe::MemeLong(int Somfinal)
 
 std::vector<std::vector<int>> Graphe::DijkstraModif(int SomInit,int Somfinal)
 {
-     int Som=SomInit;
-            int EtapeCompteur =1;
-            std::vector<std::vector<int>> PlusCourtChemins;
-            m_sommets[Som]->setMarquage(1);/// On marque le sommet de départ
-            std::vector<int> stock;
-            std::vector<int> stock2;
-            stock.push_back(0);///On initialise la case de longueur à 0
-            stock.push_back(0);///Bool pour savoir si le parcours à deja ete utilisé
-            stock.push_back(Som);///On met le sommet de départ
-            m_parcours.push_back(stock);///Le sommet est à une longueur 0 de lui meme
-            int NumParcours=0;
+        int Som=SomInit;
+        int EtapeCompteur =1;
+        std::vector<std::vector<int>> PlusCourtChemins;
+        m_sommets[Som]->setMarquage(1);/// On marque le sommet de départ
+        std::vector<int> stock;
+        std::vector<int> stock2;
+        stock.push_back(0);///On initialise la case de longueur à 0
+        stock.push_back(0);///Bool pour savoir si le parcours à deja ete utilisé
+        stock.push_back(Som);///On met le sommet de départ
+        m_parcours.push_back(stock);///Le sommet est à une longueur 0 de lui meme
+        int NumParcours=0;
 
-            while(m_sommets[rechercheID(Somfinal)]->getMarquage()==0)
+        while(m_sommets[rechercheID(Somfinal)]->getMarquage()==0)
+        {
+
+            ///Preparation à l'actualisation des sommets
+            stock.clear();
+            stock=m_parcours[NumParcours];
+            stock2=stock;
+            m_parcours[NumParcours].clear();
+            m_parcours.erase(m_parcours.begin()+NumParcours);
+
+
+
+            for (int i =0;i<m_sommets[rechercheID(Som)]->getDegre();++i) ///Parcours de la totalité des sommets adjacents
             {
-               // std::cout<<"Etape N :"<<EtapeCompteur<<std::endl;
-                ///Preparation à l'actualisation des sommets
                 stock.clear();
-                stock=m_parcours[NumParcours];
-                stock2=stock;
-                m_parcours[NumParcours].clear();
-                m_parcours.erase(m_parcours.begin()+NumParcours);
-
-
-
-                for (int i =0;i<m_sommets[rechercheID(Som)]->getDegre();++i) ///Parcours de la totalité des sommets adjacents
+                stock=stock2;
+                if(m_sommets[rechercheID(m_sommets[Som]->getAdj(i))]->getMarquage()==0)///On sélectionne les sommets adj uniquement non-marqué
                 {
-                    stock.clear();
-                    stock=stock2;
-                    if(m_sommets[rechercheID(m_sommets[Som]->getAdj(i))]->getMarquage()==0)///On sélectionne les sommets adj uniquement non-marqué
-                    {
-                        stock.push_back(m_sommets[Som]->getAdj(i));///Rajout des sommets ADJ au chemin
-                        stock[0]=stock[0]+PoidsArrete(stock[stock.size()-2],stock[stock.size()-1]);
-                        m_parcours.push_back(stock);///Ajout du chemin à la liste des chemins
-                    }
+                    stock.push_back(m_sommets[Som]->getAdj(i));///Rajout des sommets ADJ au chemin
+                    stock[0]=stock[0]+PoidsArrete(stock[stock.size()-2],stock[stock.size()-1]);
+                    m_parcours.push_back(stock);///Ajout du chemin à la liste des chemins
                 }
-                /*for (size_t i=0;i<m_parcours.size();++i)
-                {
+            }
 
-                    std::cout<<" Num :"<< i <<" longueur :"<<m_parcours[i][0]<<" Parcours :";
+            NumParcours=PlusPetiteLongueur(m_parcours);///On recupere le parcours avec la plus petite longueur
 
-                    for(size_t y =2; y<m_parcours[i].size();++y)
+            Som=m_parcours[NumParcours][m_parcours[NumParcours].size()-1];///On recupere le dernier sommet de ce parcours et on le marque
+            m_sommets[Som]->setMarquage(1);
+            EtapeCompteur++;
+
+            if(m_sommets[rechercheID(Somfinal)]->getMarquage()==1)
+            {
+                setPPL(m_parcours[IDParcours(Somfinal)][0]);
+                MemeLong(rechercheID(Somfinal));
+            }
+
+
+
+
+        }
+        //////AFFICHAGE//////
+       /*std::cout <<"Plus court chemin pour aller du sommet "<<SomInit<<" au sommet "<<Somfinal<<" :";*/
+
+        for (size_t y=0;y<m_parcours.size();y++)
+        {
+            if(m_parcours[y][1]==1)
+            {
+                PlusCourtChemins.push_back(m_parcours[y]);
+                    for(size_t i=2;i<m_parcours[y].size();++i)
                     {
-                       std::cout <<"->"<<m_parcours[i][y];
+                        //std::cout<<" ->"<<m_parcours[y][i];
                     }
                     std::cout<<std::endl;
-                }*/
-                NumParcours=PlusPetiteLongueur(m_parcours);///On recupere le parcours avec la plus petite longueur
-               // std::cout<<"Numero du parcours"<<NumParcours<<std::endl;
-                Som=m_parcours[NumParcours][m_parcours[NumParcours].size()-1];///On recupere le dernier sommet de ce parcours et on le marque
-                m_sommets[Som]->setMarquage(1);
-                EtapeCompteur++;
-
-                if(m_sommets[rechercheID(Somfinal)]->getMarquage()==1)
-                {
-                    setPPL(m_parcours[IDParcours(Somfinal)][0]);
-                    MemeLong(rechercheID(Somfinal));
-                }
-
-
-
-
             }
-            //////AFFICHAGE//////
-           /*std::cout <<"Plus court chemin pour aller du sommet "<<SomInit<<" au sommet "<<Somfinal<<" :";*/
-
-            for (size_t y=0;y<m_parcours.size();y++)
-            {
-                if(m_parcours[y][1]==1)
-                {
-                    PlusCourtChemins.push_back(m_parcours[y]);
-                        for(size_t i=2;i<m_parcours[y].size();++i)
-                        {
-                            //std::cout<<" ->"<<m_parcours[y][i];
-                        }
-                        std::cout<<std::endl;
-                }
-                }
-           // std::cout<<"Longueur : "<<m_parcours[IDParcours(Somfinal)][0]<<std::endl;
-            m_parcours.clear();
-            for(int i=0;i<getOrdre();++i)
-            {
-                m_sommets[i]->setMarquage(0);
             }
-
-            return PlusCourtChemins;
-}
-void Graphe::Ci()
-{
-    double n_pccI=0;
-    double n_pccJK=0;
-    double Somme=0;
-    double C=0;
-    std::vector<std::vector<int>> PCChemins;
-    for(int i=0;i<getOrdre();i++)
-    {
-
-        std::cout<<"I: " <<i<<std::endl;
-    for (int j=0;j<=(getOrdre()-2);++j)///Fonctionne uniquement si l'ID des sommets commence par 0
-    {
-        for (int k=1+j;k<=getOrdre()-1;++k)
+       // std::cout<<"Longueur : "<<m_parcours[IDParcours(Somfinal)][0]<<std::endl;
+        m_parcours.clear();
+        for(int i=0;i<getOrdre();++i)
         {
-            std::cout<<"j :"<<j<<" k : "<<k<<std::endl;;
-            PCChemins=DijkstraModif(j,k);
-            for(size_t x=0;x<PCChemins.size();x++)
-            {
-                for(size_t y=2;y<PCChemins[x].size();y++)
-                {
-                    if(PCChemins[x][y]==i)
-                    {
-                        n_pccI++;
-                    }
-                }
-            }
-            n_pccJK=PCChemins.size();
-            Somme=Somme+(n_pccI/n_pccJK);
-            n_pccJK=0;
-            n_pccI=0;
-            PCChemins.clear();
+            m_sommets[i]->setMarquage(0);
         }
-    }
 
-    C=(2*Somme)/(pow((double)getOrdre(),2.0)-(3*(double)getOrdre())+2);
-    m_sommets[i]->setCi(C);
-    Somme=0;
+        return PlusCourtChemins;
 }
 
 
-}
-
-void Graphe::Cp()
+void Graphe::Save()
 {
-    double Somme=0;
-    double Dij=0;///Distance entre les sommets I et J
-    double C=0;
-    std::vector<std::vector<int>> PCChemins;
-    for(int i=0;i<getOrdre();i++)///Parcours de la totalité des sommets du graphe
+    std::string const save("D:/ECE 19-20/Informatique/C++/Projet-Piscine-PS-QT-UB/Sauvegarde.txt");
+    std::ofstream monFlux(save.c_str());
+
+    if(monFlux)
     {
-     for(int y =0;y<getOrdre();y++)
-     {
-         if (y==i)///Y=/=i
-         {
-             if(y==getOrdre()-1)
-             {
-                 break;
-             }
-             else
-             {
-                 y++;
-             }
-         }
-         PCChemins=DijkstraModif(i,y);///On recupere le trajet du plus court chemin avec la longueur situé en 0
-         Dij=PCChemins[0][0];
-         std::cout<<"i :"<<i<<" y: "<<y<<"Longueur :"<<PCChemins[0][0]<<std::endl;
-         PCChemins.clear();
-         Somme=Somme+Dij;
-         Dij=0;
+        monFlux << "ID    Cd     Cvp     Ci    Ci"<<std::endl;
+        for(size_t i=0;i<getOrdre();i++)
+        {
+
+            monFlux << m_sommets[i]->getID() <<  m_sommets[i]->getCd() << m_sommets[i]->getCvp() << m_sommets[i]->getCp() << m_sommets[i]->getCi() << std::endl;
 
 
-     }
-     C=((double)getOrdre()-1)/Somme;
-     Somme=0;
-     m_sommets[i]->setCp(C);
+        }
 
     }
-
-
+    else
+    {
+        std::cout << "ERREUR: Impossible d'ouvrir le fichier." << std::endl;
+    }
 }

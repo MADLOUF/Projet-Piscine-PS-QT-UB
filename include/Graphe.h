@@ -2,6 +2,8 @@
 #define GRAPHE_H
 #include <Sommet.h>
 #include <Arrete.h>
+#include <svg.h>
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -21,6 +23,7 @@ class Graphe
         std::vector<Arrete*> m_arretes;
         std::vector<std::vector<int>> m_parcours;
         int m_PPLongueur=99999;
+        bool m_pondere;
 
     public:
 
@@ -28,6 +31,8 @@ class Graphe
         ~Graphe();
         int getOrdre() const;
         int getTaille() const;
+        int getPondere() const;
+        void setPondere(bool test);
         void DeterminerAdjacance();
         int rechercheID(int ID);///Inutile ??? Car les ID représente la position du sommet dans le vecteur.
         int PoidsArrete(int ID1,int ID2);
@@ -49,8 +54,13 @@ class Graphe
         void vulnerabilite();
         void afficher_Cd();
         void afficher_Cvp();
+        void afficher_Cp();
+        void afficher_Ci();
         void rechercher_afficher_CC();
+        void afficherPonderation(Svgfile &svg);
         std::vector<int> BFS(int num_s0)const;
+        void Save();
+        void Load_ponderation(std::string nomFichier);
 
 };
 

@@ -23,18 +23,26 @@ Arrete::Arrete (std::istream& is)///Lecture du fichier
                 throw std::runtime_error("Probleme lecture id,x,y d'une Sommet");
         }
 int Arrete::getID1() const
-        {
-            return m_ID1;
-        }
+{
+    return m_ID1;
+}
+
 int Arrete::getID2() const
-        {
-            return m_ID2;
-        }
+{
+    return m_ID2;
+}
+
 int Arrete::getPoids() const
-        {
-            return m_poids;
-        }
+{
+    return m_poids;
+}
+
 int Arrete::getNumArrete() const
-        {
-            return m_NumArrete;
-        }
+{
+    return m_NumArrete;
+}
+
+void Arrete::setPoids(int poids)
+{
+    m_poids=poids;
+}

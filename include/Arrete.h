@@ -21,7 +21,9 @@ public :
         int getID1() const;
         int getID2() const;
         int getPoids() const;
+        void setPoids(int poids);
         int getNumArrete() const;
+
 
 };
 
