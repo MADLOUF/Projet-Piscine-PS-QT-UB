@@ -63,6 +63,7 @@ class Graphe
         std::vector<int> BFS(int num_s0)const;
         void Save();
         void Load_ponderation(std::string nomFichier);
+        void comparaison();
 
 };
 
