@@ -33,7 +33,6 @@ int main()
     Graphe graphe{"graphe_cycle5_topo.txt"};
     char choix;
     bool quit = 0;
-    int test=0;
     std::string nomFichier2;
 
 

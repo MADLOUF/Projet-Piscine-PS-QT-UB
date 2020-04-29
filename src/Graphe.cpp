@@ -308,13 +308,15 @@ void Graphe::AlgoDijkstra(int SomInit,int Somfinal)
 void Graphe::Cd()
 {
 
-    double indice = 0;
+    double C = 0;
+    double Cnn=0;
     for (int i=0; i<getOrdre() ; i++)
     {
 
-        indice = double(m_sommets[i]->getDegre())/(getOrdre()-1);
-        m_sommets[i]->setCd(indice);
-
+        C = double(m_sommets[i]->getDegre())/(getOrdre()-1);
+        Cnn= C*(getOrdre()-1);
+        m_sommets[i]->setCd(C);
+        m_sommets[i]->setCdnn(Cnn);
 
 
     }
@@ -407,6 +409,7 @@ void Graphe::Cp()
     double Somme=0;
     double Dij=0;///Distance entre les sommets I et J
     double C=0;
+    double Cnn=0;
     std::vector<std::vector<int>> PCChemins;
 
     for(int i=0;i<getOrdre();i++)///Parcours de la totalité des sommets du graphe
@@ -435,9 +438,11 @@ void Graphe::Cp()
 
 
      }
+     Cnn=(1/Somme);
      C=((double)getOrdre()-1)/Somme;
      Somme=0;
      m_sommets[i]->setCp(C);
+     m_sommets[i]->setCpnn(Cnn);
 
     }
 
@@ -464,6 +469,7 @@ void Graphe::Ci()
     double n_pccJK=0;
     double Somme=0;
     double C=0;
+    double Cnn=0;
     std::vector<std::vector<int>> PCChemins;
     for(int i=0;i<getOrdre();i++)
     {
@@ -492,8 +498,9 @@ void Graphe::Ci()
             PCChemins.clear();
         }
     }
-
+    Cnn=(2*Somme);
     C=(2*Somme)/(pow((double)getOrdre(),2.0)-(3*(double)getOrdre())+2);
+    m_sommets[i]->setCinn(Cnn);
     m_sommets[i]->setCi(C);
     Somme=0;
 }

@@ -20,10 +20,13 @@ class Sommet
         int m_y;
         int m_marquage=0;
         double m_Cd=0;
+        double m_Cdnn=0;
         double m_C=0;
         double m_Cvp=1;
         double m_Ci=0;
+        double m_Cinn=0;
         double m_Cp=0;
+        double m_Cpnn=0;
     public:
         Sommet(std::istream& is);
         int getDegre() const;
@@ -36,17 +39,23 @@ class Sommet
         double getC()const;
         double getCvp()const;
         double getCd()const;
+        double getCdnn()const;
         double getCi()const;
+        double getCinn()const;
         double getCp()const;
+        double getCpnn()const;
         std::string getNom () const;
         void Adjacent(int ID);
         void Erase_Adjacent();
         void setMarquage(int coul);
         void setCd(double C);
+        void setCdnn(double C);
         void setCvp(double C);
         void setC(double C);
         void setCi(double C);
+        void setCinn(double C);
         void setCp(double C);
+        void setCpnn(double C);
         void Adjtrie();
         void afficherAdj();
 
