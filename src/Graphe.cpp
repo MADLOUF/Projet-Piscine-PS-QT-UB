@@ -383,9 +383,13 @@ void Graphe::Cvp()
     double L2=0;
     double L3=1;///DeltaLambda
     double C=0;
-	double Cvp=0;
+    double Cvp=0;
     double Somme=0;
     std::vector<int> ListeADJ;
+    for(int i=0;i<getOrdre();++i)///Rénitialisation de Cvp
+    {
+        m_sommets[i]->setCvp(1);
+    }
     while(L3>=0.01)
 	{
 
@@ -696,6 +700,10 @@ void Graphe::vulnerabilite()
     int test=0;
     int a1=0;
     std::vector<int> ListeADJ;
+    Cp();
+    Cd();
+    Ci();
+    Cvp();
 
     do
     {
@@ -703,22 +711,32 @@ void Graphe::vulnerabilite()
         std::cin>>a1;
         m_arretes.erase (m_arretes.begin()+a1+1);
 
+
         for(size_t i=0;i<m_sommets.size();++i)
         {
             m_sommets[i]->Erase_Adjacent();
             ListeADJ = m_sommets[i]->getAdjListe() ;
-            for(auto element : ListeADJ )
-            {
 
-                std::cout<<"coucou: "<<element<<std::endl;
-            }
+        }
+        DeterminerAdjacance();
+        for(int i =0;i<getOrdre();++i)
+        {
+            m_sommets[i]->setCd2(m_sommets[i]->getCd());
+            m_sommets[i]->setCvp2(m_sommets[i]->getCvp());
+            m_sommets[i]->setCi2(m_sommets[i]->getCi());
+            m_sommets[i]->setCp2(m_sommets[i]->getCp());
         }
 
-        DeterminerAdjacance();
+
         afficherGraphe();
         std::cout<<"Vous avez supprim\202 l'arete "<<a1<<". Pour supprimer une autre arete, tapez 0 sinon tapez 1"<<std::endl;
         std::cin>>test;
     }while(test==0);
+        Cp();
+        Cd();
+        Ci();
+        Cvp();
+        comparaison();
 
     rechercher_afficher_CC();
 
@@ -865,5 +883,22 @@ void Graphe::Save()
     else
     {
         std::cout << "ERREUR: Impossible d'ouvrir le fichier." << std::endl;
+    }
+}
+void Graphe::comparaison()
+{
+    std::cout<<" Comparaison des indices de centralite avant et apres la suppression d'aretes :"<<std::endl;
+    for(int i=0;i<getOrdre();++i)
+    {
+        std::cout<<"Sommet N"<<i<<std::endl;
+        double Cd3=m_sommets[i]->getCd()-m_sommets[i]->getCd2();
+        double Cvp3=m_sommets[i]->getCvp()-m_sommets[i]->getCvp2();
+        double Ci3=m_sommets[i]->getCi()-m_sommets[i]->getCi2();
+        double Cp3=m_sommets[i]->getCp()-m_sommets[i]->getCp2();
+        std::cout<<"Cd Avant: "<<m_sommets[i]->getCd()<<" Cd Apres: "<<m_sommets[i]->getCd2()<<" Difference :"<<Cd3<< std::endl;
+        std::cout<<"Cvp Avant: "<<m_sommets[i]->getCvp()<<"Cvp Apres: "<<m_sommets[i]->getCvp2()<<" Difference :"<<Cvp3<< std::endl;
+        std::cout<<"Ci Avant: "<<m_sommets[i]->getCi()<<" Ci Apres: "<<m_sommets[i]->getCi2()<<" Difference :"<<Ci3<< std::endl;
+        std::cout<<"Cp Avant: "<<m_sommets[i]->getCp()<<" Cp Apres: "<<m_sommets[i]->getCp2()<<" Difference :"<<Cp3<< std::endl<<std::endl;
+
     }
 }
