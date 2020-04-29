@@ -42,8 +42,18 @@ int main()
         switch(choix){
             case '1' :  graphe.afficher_Cd();
                         graphe.afficher_Cvp();
-                        //graphe.afficher_Cp();
-                        //graphe.afficher_Ci();
+                        if(graphe.getPondere()==1)
+                        {
+                            graphe.afficher_Cp();
+                            graphe.afficher_Ci();
+                        }
+                        else
+                        {
+                            std::cout<<std::endl;
+                            std::cout<<"La ponderation n'est pas charg\202 ! Vous ne pouvez pas afficher Cp et Ci"<<std::endl;
+                            std::cout<<std::endl;
+                        }
+
                         graphe.rechercher_afficher_CC();
                         break;
 

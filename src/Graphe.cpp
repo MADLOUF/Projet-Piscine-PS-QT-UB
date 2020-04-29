@@ -402,6 +402,7 @@ void Graphe::Cp()
     double Dij=0;///Distance entre les sommets I et J
     double C=0;
     std::vector<std::vector<int>> PCChemins;
+
     for(int i=0;i<getOrdre();i++)///Parcours de la totalité des sommets du graphe
     {
      for(int y =0;y<getOrdre();y++)
@@ -417,11 +418,11 @@ void Graphe::Cp()
                  y++;
              }
          }
-         std::cout<<"test1"<<std::endl;
+
          PCChemins=DijkstraModif(i,y);///On recupere le trajet du plus court chemin avec la longueur situé en 0
-         std::cout<<"test2"<<std::endl;
+
          Dij=PCChemins[0][0];
-         std::cout<<"i :"<<i<<" y: "<<y<<"Longueur :"<<PCChemins[0][0]<<std::endl;
+         //std::cout<<"i :"<<i<<" y: "<<y<<"Longueur :"<<PCChemins[0][0]<<std::endl;
          PCChemins.clear();
          Somme=Somme+Dij;
          Dij=0;
@@ -430,7 +431,6 @@ void Graphe::Cp()
      }
      C=((double)getOrdre()-1)/Somme;
      Somme=0;
-     std::cout<<"valeur : "<<C<<std::endl;
      m_sommets[i]->setCp(C);
 
     }
@@ -462,12 +462,12 @@ void Graphe::Ci()
     for(int i=0;i<getOrdre();i++)
     {
 
-        std::cout<<"I: " <<i<<std::endl;
+
     for (int j=0;j<=(getOrdre()-2);++j)///Fonctionne uniquement si l'ID des sommets commence par 0
     {
         for (int k=1+j;k<=getOrdre()-1;++k)
         {
-            std::cout<<"j :"<<j<<" k : "<<k<<std::endl;;
+
             PCChemins=DijkstraModif(j,k);
             for(size_t x=0;x<PCChemins.size();x++)
             {
@@ -499,7 +499,7 @@ void Graphe::afficher_Ci()
 {
     Ci();
     std::cout<<std::endl;
-    std::cout<<"Indice de centralit\202 de proximit\202 par sommet :"<<std::endl;
+    std::cout<<"Indice de centralit\202 d'interm\202diarit\202  par sommet :"<<std::endl;
     std::cout<<std::endl;
     for(size_t i=0;i<m_sommets.size();i++)
     {
@@ -554,7 +554,7 @@ void Graphe::afficherPonderation(Svgfile &svgout)
         {
             s1 = m_arretes[i]->getID1();
             s2 = m_arretes[i]->getID2();
-            svgout.addText((m_sommets[s1]->getX()*100+ m_sommets[s2]->getX()*100)/2-20, (m_sommets[s1]->getY()*100+ m_sommets[s2]->getY()*100)/2, m_arretes[i]->getNumArrete(),"red" );
+            svgout.addText((m_sommets[s1]->getX()*100+ m_sommets[s2]->getX()*100)/2-30, (m_sommets[s1]->getY()*100+ m_sommets[s2]->getY()*100)/2, m_arretes[i]->getPoids(),"red" );
         }
 
 }
@@ -757,7 +757,7 @@ std::vector<std::vector<int>> Graphe::DijkstraModif(int SomInit,int Somfinal)
                     {
                         //std::cout<<" ->"<<m_parcours[y][i];
                     }
-                    std::cout<<std::endl;
+
             }
             }
        // std::cout<<"Longueur : "<<m_parcours[IDParcours(Somfinal)][0]<<std::endl;
