@@ -7,6 +7,7 @@
 
 char menu()
 {
+    system("cls");
     char choix;
     std::cout<<"1. Cr\202er un graphe"<<std::endl;
     std::cout<<"2. Afficher les donn\202es du graphe en console"<<std::endl;
@@ -17,9 +18,6 @@ char menu()
     std::cout<<"7. Desactiver la ponderation"<<std::endl;
     std::cout<<"8. Activer les indices des sommets"<<std::endl;
     std::cout<<"9. Desactiver les indices des sommets"<<std::endl;
-
-
-
 
     do
     {
@@ -54,6 +52,8 @@ int main()
                         graphe.EffacerGraphe();
                         graphe.CreerGraphe(nomFichier1);
                         std::cout<<"Le graphe a bien \202t\202 cr\202\202"<<std::endl;
+                        system("pause");
+                        test=1;
                         break;
 
             case '2' :  graphe.afficher_Cd();
@@ -73,8 +73,14 @@ int main()
                         graphe.rechercher_afficher_CC();
                         break;
 
-            case '3' :  graphe.afficherGraphe();
+            case '3' :  if(test==1)
+                        {
+                            graphe.afficherGraphe();
+                        }
+                        else
+                            std::cout<<"Vous n'avez pas chargé de graphe"<<std::endl;
 
+                        system("pause");
                         break;
 
             case '4' :  graphe.Cd();
@@ -85,6 +91,7 @@ int main()
                             graphe.Ci();
                         }
                         graphe.Save();
+                        system("pause");
                         break;
             case '5' :  graphe.vulnerabilite(); ///rappeler l'affichage pour mettre le num des aretes a jour
                         break;
@@ -94,13 +101,15 @@ int main()
                         std::cin>>nomFichier2;
                         graphe.Load_ponderation(nomFichier2);
                         graphe.setPondere(1);
-                        std::cout<<"La ponderation a bien \202t\202 charg\202 ! Afficher le graphe pour la voir."<<std::endl;
+                        std::cout<<"La ponderation a bien \202t\202 charg\202e ! Afficher le graphe pour la voir."<<std::endl;
+                        system("pause");
                         break;
 
             case '7' :  graphe.setPondere(0);
                         std::cout<<std::endl;
                         std::cout<<"Ponderation enlev\202e"<<std::endl;
                         std::cout<<std::endl;
+                        system("pause");
                         break;
 
             case '8' :  graphe.Cd();
@@ -111,12 +120,15 @@ int main()
                             graphe.Ci();
                         }
                         graphe.setIndice(1);
+                        std::cout<<"Les indices ont bien \202t\202 charg\202s ! Afficher le graphe pour les voir."<<std::endl;
+                        system("pause");
                         break;
 
             case '9' :  graphe.setIndice(0);
                         std::cout<<std::endl;
                         std::cout<<"Indices enlev\202e"<<std::endl;
                         std::cout<<std::endl;
+                        system("pause");
                         break;
 
             default :   printf("Ne fonctionne pas \n");

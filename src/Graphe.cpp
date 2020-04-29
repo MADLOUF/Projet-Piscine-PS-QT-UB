@@ -19,6 +19,7 @@ Graphe::Graphe()
 
 void Graphe::CreerGraphe(std::string nomFichier)
 {
+    system("cls");
     setPondere(0); ///ne pas mettre la ponderation au debut du graphe
     setIndice(0); ///ne pas mettre les indices des le debut
     std::ifstream ifs{nomFichier};
@@ -60,6 +61,7 @@ void Graphe::CreerGraphe(std::string nomFichier)
                 {m_arretes.push_back( new Arrete{ifs} );}
                 std::cout<<std::endl;
                 DeterminerAdjacance();
+
 }
 
 void Graphe::EffacerGraphe()
@@ -567,6 +569,7 @@ void Graphe::afficher_Ci()
 
 void Graphe::afficherGraphe()
 {
+    system("cls");
     Svgfile svgout;
         ///placer les sommets
 
@@ -602,7 +605,10 @@ void Graphe::afficherGraphe()
             afficherIndices(svgout);
         }
         else
-            std::cout<<"Vous n'avez pas charg\202 la ponderation"<<std::endl;
+            std::cout<<"Vous n'avez pas charg\202 les indices"<<std::endl;
+
+
+
 
 }
 
