@@ -961,15 +961,16 @@ void Graphe::vulnerabilite()
         std::cout<<"Vous avez supprim\202 l'arete "<<a1<<". Pour supprimer une autre arete, tapez 0 sinon tapez 1"<<std::endl;
         std::cin>>test;
     }while(test==0);
-    std::cout<<"test6"<<std::endl;
-        Cp();
-        std::cout<<"test7"<<std::endl;
-        Cd();
-        std::cout<<"test8"<<std::endl;
-        Ci();
-        std::cout<<"test9"<<std::endl;
+
         Cvp();
-        std::cout<<"test10"<<std::endl;
+        Cd();
+        if(getPondere()==1)
+        {
+            Ci();
+            Cp();
+        }
+
+
         comparaison();
 
     rechercher_afficher_CC();
