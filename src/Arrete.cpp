@@ -46,3 +46,11 @@ void Arrete::setPoids(int poids)
 {
     m_poids=poids;
 }
+void Arrete::setCiar(double C)
+{
+        m_Ciar=C;
+}
+double Arrete::getCiar()
+{
+        return m_Ciar;
+}

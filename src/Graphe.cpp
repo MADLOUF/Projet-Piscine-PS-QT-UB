@@ -666,7 +666,7 @@ void Graphe::afficherColoration(Svgfile &svgout)
     double inter=0;
         if(getChoixcoul()=='1') /// coloration par Cd
         {
-            for(size_t i=0; i<getOrdre();i++)
+            for(int i=0; i<getOrdre();i++)
             {
                 if(m_sommets[i]->getDegre()==0)
                 {
@@ -695,7 +695,7 @@ void Graphe::afficherColoration(Svgfile &svgout)
 
         if(getChoixcoul()=='2') /// coloration par Cvp
         {
-            for(size_t i=0; i<getOrdre();i++)
+            for(int i=0; i<getOrdre();i++)
             {
 
                 if(maxi<m_sommets[i]->getCvp())   ///trouver la valeur max
@@ -707,7 +707,7 @@ void Graphe::afficherColoration(Svgfile &svgout)
 
             inter=maxi/6;    ///car 6 couleurs
 
-            for(size_t i=0; i<getOrdre();i++)
+            for(int i=0; i<getOrdre();i++)
             {
                 if(0<=m_sommets[i]->getCvp() && m_sommets[i]->getCvp()<inter)
                 {
@@ -741,7 +741,7 @@ void Graphe::afficherColoration(Svgfile &svgout)
             if(getChoixcoul()=='3') /// coloration par Cp
             {
                 Cp();  ///l'appeler car sinon il s'effectue pas tant qu'on l'affiche pas
-                for(size_t i=0; i<getOrdre();i++)
+                for(int i=0; i<getOrdre();i++)
                 {
 
                     if(maxi < m_sommets[i]->getCp())   ///trouver la valeur max
@@ -755,7 +755,7 @@ void Graphe::afficherColoration(Svgfile &svgout)
 
                 inter=maxi/6;    ///car 6 couleurs
 
-                for(size_t i=0; i<getOrdre();i++)
+                for(int i=0; i<getOrdre();i++)
                 {
                     if(0<=m_sommets[i]->getCp() && m_sommets[i]->getCp()<inter)
                     {
@@ -788,7 +788,7 @@ void Graphe::afficherColoration(Svgfile &svgout)
             if(getChoixcoul()=='4') /// coloration par Ci
             {
                 Ci();
-                for(size_t i=0; i<getOrdre();i++)
+                for(int i=0; i<getOrdre();i++)
                 {
 
                     if(maxi<m_sommets[i]->getCi())   ///trouver la valeur max
@@ -800,7 +800,7 @@ void Graphe::afficherColoration(Svgfile &svgout)
 
                 inter=maxi/6;    ///car 6 couleurs
 
-                for(size_t i=0; i<getOrdre();i++)
+                for(int i=0; i<getOrdre();i++)
                 {
                     if(0<=m_sommets[i]->getCi() && m_sommets[i]->getCi()<inter)
                     {
@@ -1138,4 +1138,57 @@ void Graphe::comparaison()
 
     }
 }
+int Graphe::AreteID(int i,std::vector<std::vector<int>> PCC)
+{
+ int compteur=0;
+    for(size_t x=0;x<PCC.size();x++)
+            {
+                for(size_t y=2;y<PCC[x].size()-1;y++)
+                {
+                    if(m_arretes[i]->getID1()==PCC[x][y]&&m_arretes[i]->getID2()==PCC[x][y+1])///Check La présence de l'arrete sur le chemin
+                    {
+                        compteur++;
+                    }
+                    else if(m_arretes[i]->getID2()==PCC[x][y]&&m_arretes[i]->getID1()==PCC[x][y+1])
+                        {
+                            compteur++;
+                        }
+                }
+            }
+            return compteur;
 
+}
+void Graphe::AreteCi()
+{
+
+    double n_pccI=0;
+    double n_pccJK=0;
+    double Somme=0;
+    double C=0;
+    std::vector<std::vector<int>> PCChemins;
+    for(int i=0;i<getTaille();i++)
+    {
+        std::cout<<"Arete etudiee :"<<m_arretes[i]->getID1()<<" "<<m_arretes[i]->getID2()<<std::endl;
+    for (int j=0;j<=(getOrdre()-2);++j)///Fonctionne uniquement si l'ID des sommets commence par 0
+    {
+
+        for (int k=1+j;k<=getOrdre()-1;++k)
+        {
+            std::cout<<"Sommets : "<<j<<" " <<k<<std::endl;
+            PCChemins=DijkstraModif(j,k);
+            n_pccI= AreteID(i,PCChemins);
+            std::cout<<"pccI: "<<n_pccI;
+            n_pccJK=PCChemins.size();
+            std::cout<<" pccJK :"<<n_pccJK<<std::endl<<std::endl;
+            Somme=Somme+(n_pccI/n_pccJK);
+            n_pccJK=0;
+            n_pccI=0;
+            PCChemins.clear();
+        }
+    }
+    C=(2*Somme)/(pow((double)getOrdre(),2.0)-(3*(double)getOrdre())+2);
+    std::cout << " C :"<<C<<std::endl;
+    m_arretes[i]->setCiar(C);
+    Somme=0;
+}
+}
