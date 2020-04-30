@@ -16,6 +16,7 @@ private :
     int m_ID1;
     int m_ID2;
     int m_poids;
+    double m_Ciar=0;
 public :
         Arrete(std::istream& is);
         int getID1() const;
@@ -23,6 +24,8 @@ public :
         int getPoids() const;
         void setPoids(int poids);
         int getNumArrete() const;
+        void setCiar(double C);
+        double getCiar();
 
 
 };
