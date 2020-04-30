@@ -666,7 +666,7 @@ void Graphe::afficherColoration(Svgfile &svgout)
     double inter=0;
         if(getChoixcoul()=='1') /// coloration par Cd
         {
-            for(size_t i=0; i<getOrdre();i++)
+            for(int i=0; i<getOrdre();i++)
             {
                 if(m_sommets[i]->getDegre()==0)
                 {
@@ -695,7 +695,7 @@ void Graphe::afficherColoration(Svgfile &svgout)
 
         if(getChoixcoul()=='2') /// coloration par Cvp
         {
-            for(size_t i=0; i<getOrdre();i++)
+            for(int i=0; i<getOrdre();i++)
             {
 
                 if(maxi<m_sommets[i]->getCvp())   ///trouver la valeur max
@@ -707,7 +707,7 @@ void Graphe::afficherColoration(Svgfile &svgout)
 
             inter=maxi/6;    ///car 6 couleurs
 
-            for(size_t i=0; i<getOrdre();i++)
+            for(int i=0; i<getOrdre();i++)
             {
                 if(0<=m_sommets[i]->getCvp() && m_sommets[i]->getCvp()<inter)
                 {
@@ -741,7 +741,7 @@ void Graphe::afficherColoration(Svgfile &svgout)
             if(getChoixcoul()=='3') /// coloration par Cp
             {
                 Cp();  ///l'appeler car sinon il s'effectue pas tant qu'on l'affiche pas
-                for(size_t i=0; i<getOrdre();i++)
+                for(int i=0; i<getOrdre();i++)
                 {
 
                     if(maxi < m_sommets[i]->getCp())   ///trouver la valeur max
@@ -755,7 +755,7 @@ void Graphe::afficherColoration(Svgfile &svgout)
 
                 inter=maxi/6;    ///car 6 couleurs
 
-                for(size_t i=0; i<getOrdre();i++)
+                for(int i=0; i<getOrdre();i++)
                 {
                     if(0<=m_sommets[i]->getCp() && m_sommets[i]->getCp()<inter)
                     {
@@ -788,7 +788,7 @@ void Graphe::afficherColoration(Svgfile &svgout)
             if(getChoixcoul()=='4') /// coloration par Ci
             {
                 Ci();
-                for(size_t i=0; i<getOrdre();i++)
+                for(int i=0; i<getOrdre();i++)
                 {
 
                     if(maxi<m_sommets[i]->getCi())   ///trouver la valeur max
@@ -800,7 +800,7 @@ void Graphe::afficherColoration(Svgfile &svgout)
 
                 inter=maxi/6;    ///car 6 couleurs
 
-                for(size_t i=0; i<getOrdre();i++)
+                for(int i=0; i<getOrdre();i++)
                 {
                     if(0<=m_sommets[i]->getCi() && m_sommets[i]->getCi()<inter)
                     {

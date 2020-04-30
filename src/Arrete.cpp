@@ -46,11 +46,11 @@ void Arrete::setPoids(int poids)
 {
     m_poids=poids;
 }
-void Graphe::setCiar(double C)
+void Arrete::setCiar(double C)
 {
         m_Ciar=C;
 }
-double Graphe::getCiar()
+double Arrete::getCiar()
 {
         return m_Ciar;
 }

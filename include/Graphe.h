@@ -64,7 +64,7 @@ class Graphe
         void afficher_Cvp();
         void afficher_Cp();
         void afficher_Ci();
-        int AreteID(int i,std::vector<std::vector<int>> PCC)///Utile pr Arete CI
+        int AreteID(int i,std::vector<std::vector<int>> PCC);///Utile pr Arete CI
         void AreteCi();
         void rechercher_afficher_CC();
         void afficherPonderation(Svgfile &svg);
