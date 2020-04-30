@@ -588,7 +588,7 @@ void Graphe::afficherGraphe()
             s1 = m_arretes[i]->getID1();
             s2 = m_arretes[i]->getID2();
             svgout.addLine(m_sommets[s1]->getX()*100, m_sommets[s1]->getY()*100, m_sommets[s2]->getX()*100, m_sommets[s2]->getY()*100, "black");
-            svgout.addText((m_sommets[s1]->getX()*100+ m_sommets[s2]->getX()*100)/2, (m_sommets[s1]->getY()*100+ m_sommets[s2]->getY()*100)/2, m_arretes[i]->getNumArrete(),"green" );
+            svgout.addText((m_sommets[s1]->getX()*100+ m_sommets[s2]->getX()*100)/2, (m_sommets[s1]->getY()*100+ m_sommets[s2]->getY()*100)/2, i,"green" );
         }
 
         ///affiche ponderation si activé
@@ -728,19 +728,24 @@ void Graphe :: rechercher_afficher_CC()
 }
 void Graphe::vulnerabilite()
 {
+    std::cout<<"test2"<<std::endl;
     int test=0;
     int a1=0;
     std::vector<int> ListeADJ;
-    Cp();
     Cd();
-    Ci();
     Cvp();
+    if(getPondere()==1)
+    {
+        Ci();
+        Cp();
+    }
 
     do
     {
+        std::cout<<"test4"<<std::endl;
         std::cout<<"Rentrez le numero de l'arete que vous voulez supprimer"<<std::endl;
         std::cin>>a1;
-        m_arretes.erase (m_arretes.begin()+a1+1);
+        m_arretes.erase (m_arretes.begin()+a1);
 
 
         for(size_t i=0;i<m_sommets.size();++i)

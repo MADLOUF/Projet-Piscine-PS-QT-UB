@@ -71,6 +71,7 @@ int main()
                         }
 
                         graphe.rechercher_afficher_CC();
+                        system("pause");
                         break;
 
             case '3' :  if(test==1)
@@ -93,7 +94,10 @@ int main()
                         graphe.Save();
                         system("pause");
                         break;
-            case '5' :  graphe.vulnerabilite(); ///rappeler l'affichage pour mettre le num des aretes a jour
+
+            case '5' :  std::cout<<"test"<<std::endl;
+                        graphe.vulnerabilite(); ///rappeler l'affichage pour mettre le num des aretes a jour
+                        std::cout<<"test3"<<std::endl;
                         break;
 
             case '6' :  std::cout<<std::endl;
