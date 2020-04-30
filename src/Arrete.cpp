@@ -50,7 +50,7 @@ void Graphe::setCiar(double C)
 {
         m_Ciar=C;
 }
-double Graphe::getCiar(double C)
+double Graphe::getCiar()
 {
         return m_Ciar;
 }
