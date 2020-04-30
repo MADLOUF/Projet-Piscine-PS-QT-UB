@@ -662,8 +662,8 @@ void Graphe::afficherIndices(Svgfile &svgout)
 
 void Graphe::afficherColoration(Svgfile &svgout)
 {
-    int maxi=0;
-    int inter=0;
+    double maxi=0;
+    double inter=0;
         if(getChoixcoul()=='1') /// coloration par Cd
         {
             for(size_t i=0; i<getOrdre();i++)
@@ -709,122 +709,132 @@ void Graphe::afficherColoration(Svgfile &svgout)
 
             for(size_t i=0; i<getOrdre();i++)
             {
-                if(0<=m_sommets[i]->getCvp()<inter)
+                if(0<=m_sommets[i]->getCvp() && m_sommets[i]->getCvp()<inter)
                 {
                     m_sommets[i]->setCouleur("cyan");
                 }
-                if(inter<=m_sommets[i]->getCvp()<inter*2)
+                if(inter<=m_sommets[i]->getCvp() && m_sommets[i]->getCvp()<inter*2)
                 {
                     m_sommets[i]->setCouleur("blue");
                 }
-                if(inter*2<=m_sommets[i]->getCvp()<inter*3)
+                if(inter*2<=m_sommets[i]->getCvp() && m_sommets[i]->getCvp()<inter*3)
                 {
                     m_sommets[i]->setCouleur("green");
                 }
-                if(inter*3<=m_sommets[i]->getCvp()<inter*4)
+                if(inter*3<=m_sommets[i]->getCvp() && m_sommets[i]->getCvp()<inter*4)
                 {
                     m_sommets[i]->setCouleur("yellow");
                 }
-                if(inter*4<=m_sommets[i]->getCvp()<inter*5)
+                if(inter*4<=m_sommets[i]->getCvp() && m_sommets[i]->getCvp()<inter*5)
                 {
                     m_sommets[i]->setCouleur("orange");
                 }
-                if(inter*5<=m_sommets[i]->getCvp()<maxi)
+                if(inter*5<=m_sommets[i]->getCvp() && m_sommets[i]->getCvp()<maxi)
                 {
                     m_sommets[i]->setCouleur("red");
                 }
 
             }
         }
-
-        if(getChoixcoul()=='3') /// coloration par Cp
+        if(getPondere()==1)
         {
-            for(size_t i=0; i<getOrdre();i++)
+            if(getChoixcoul()=='3') /// coloration par Cp
             {
-
-                if(maxi<m_sommets[i]->getCp())   ///trouver la valeur max
+                Cp();  ///l'appeler car sinon il s'effectue pas tant qu'on l'affiche pas
+                for(size_t i=0; i<getOrdre();i++)
                 {
-                    maxi=m_sommets[i]->getCp();
+
+                    if(maxi < m_sommets[i]->getCp())   ///trouver la valeur max
+                    {
+                        maxi=m_sommets[i]->getCp();
+                        std::cout<<"Maxi : "<<maxi<<std::endl;
+                    }
+
+                }
+                std::cout<<"Maxi : "<<maxi<<std::endl;
+
+                inter=maxi/6;    ///car 6 couleurs
+
+                for(size_t i=0; i<getOrdre();i++)
+                {
+                    if(0<=m_sommets[i]->getCp() && m_sommets[i]->getCp()<inter)
+                    {
+                        m_sommets[i]->setCouleur("cyan");
+                    }
+                    if(inter<=m_sommets[i]->getCp() && m_sommets[i]->getCp()<inter*2)
+                    {
+                        m_sommets[i]->setCouleur("blue");
+                    }
+                    if(inter*2<=m_sommets[i]->getCp() && m_sommets[i]->getCp()<inter*3)
+                    {
+                        m_sommets[i]->setCouleur("green");
+                    }
+                    if(inter*3<=m_sommets[i]->getCp() && m_sommets[i]->getCp()<inter*4)
+                    {
+                        m_sommets[i]->setCouleur("yellow");
+                    }
+                    if(inter*4<=m_sommets[i]->getCp() && m_sommets[i]->getCp()<inter*5)
+                    {
+                        m_sommets[i]->setCouleur("orange");
+                    }
+                    if(inter*5<=m_sommets[i]->getCp() && m_sommets[i]->getCp()<maxi)
+                    {
+                        m_sommets[i]->setCouleur("red");
+                    }
+
                 }
 
             }
-
-            inter=maxi/6;    ///car 6 couleurs
-
-            for(size_t i=0; i<getOrdre();i++)
+            if(getChoixcoul()=='4') /// coloration par Ci
             {
-                if(0<=m_sommets[i]->getCp()<inter)
+                Ci();
+                for(size_t i=0; i<getOrdre();i++)
                 {
-                    m_sommets[i]->setCouleur("cyan");
+
+                    if(maxi<m_sommets[i]->getCi())   ///trouver la valeur max
+                    {
+                        maxi=m_sommets[i]->getCi();
+                    }
+
                 }
-                if(inter<=m_sommets[i]->getCp()<inter*2)
+
+                inter=maxi/6;    ///car 6 couleurs
+
+                for(size_t i=0; i<getOrdre();i++)
                 {
-                    m_sommets[i]->setCouleur("blue");
+                    if(0<=m_sommets[i]->getCi() && m_sommets[i]->getCi()<inter)
+                    {
+                        m_sommets[i]->setCouleur("cyan");
+                    }
+                    if(inter<=m_sommets[i]->getCi() && m_sommets[i]->getCi()<inter*2)
+                    {
+                        m_sommets[i]->setCouleur("blue");
+                    }
+                    if(inter*2<=m_sommets[i]->getCi() && m_sommets[i]->getCi()<inter*3)
+                    {
+                        m_sommets[i]->setCouleur("green");
+                    }
+                    if(inter*3<=m_sommets[i]->getCi() && m_sommets[i]->getCi()<inter*4)
+                    {
+                        m_sommets[i]->setCouleur("yellow");
+                    }
+                    if(inter*4<=m_sommets[i]->getCi() && m_sommets[i]->getCi()<inter*5)
+                    {
+                        m_sommets[i]->setCouleur("orange");
+                    }
+                    if(inter*5<=m_sommets[i]->getCi() && m_sommets[i]->getCi()<maxi)
+                    {
+                        m_sommets[i]->setCouleur("red");
+                    }
+
                 }
-                if(inter*2<=m_sommets[i]->getCp()<inter*3)
-                {
-                    m_sommets[i]->setCouleur("green");
-                }
-                if(inter*3<=m_sommets[i]->getCp()<inter*4)
-                {
-                    m_sommets[i]->setCouleur("yellow");
-                }
-                if(inter*4<=m_sommets[i]->getCp()<inter*5)
-                {
-                    m_sommets[i]->setCouleur("orange");
-                }
-                if(inter*5<=m_sommets[i]->getCp()<maxi)
-                {
-                    m_sommets[i]->setCouleur("red");
-                }
+
 
             }
-
         }
-        if(getChoixcoul()=='4') /// coloration par Ci
-        {
-            for(size_t i=0; i<getOrdre();i++)
-            {
 
-                if(maxi<m_sommets[i]->getCi())   ///trouver la valeur max
-                {
-                    maxi=m_sommets[i]->getCi();
-                }
 
-            }
 
-            inter=maxi/6;    ///car 6 couleurs
-
-            for(size_t i=0; i<getOrdre();i++)
-            {
-                if(0<=m_sommets[i]->getCi()<inter)
-                {
-                    m_sommets[i]->setCouleur("cyan");
-                }
-                if(inter<=m_sommets[i]->getCi()<inter*2)
-                {
-                    m_sommets[i]->setCouleur("blue");
-                }
-                if(inter*2<=m_sommets[i]->getCi()<inter*3)
-                {
-                    m_sommets[i]->setCouleur("green");
-                }
-                if(inter*3<=m_sommets[i]->getCi()<inter*4)
-                {
-                    m_sommets[i]->setCouleur("yellow");
-                }
-                if(inter*4<=m_sommets[i]->getCi()<inter*5)
-                {
-                    m_sommets[i]->setCouleur("orange");
-                }
-                if(inter*5<=m_sommets[i]->getCi()<maxi)
-                {
-                    m_sommets[i]->setCouleur("red");
-                }
-
-            }
-
-        }
 
         ///placer les sommets
 
@@ -951,10 +961,15 @@ void Graphe::vulnerabilite()
         std::cout<<"Vous avez supprim\202 l'arete "<<a1<<". Pour supprimer une autre arete, tapez 0 sinon tapez 1"<<std::endl;
         std::cin>>test;
     }while(test==0);
+    std::cout<<"test6"<<std::endl;
         Cp();
+        std::cout<<"test7"<<std::endl;
         Cd();
+        std::cout<<"test8"<<std::endl;
         Ci();
+        std::cout<<"test9"<<std::endl;
         Cvp();
+        std::cout<<"test10"<<std::endl;
         comparaison();
 
     rechercher_afficher_CC();
