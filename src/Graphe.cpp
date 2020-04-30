@@ -22,6 +22,7 @@ void Graphe::CreerGraphe(std::string nomFichier)
     system("cls");
     setPondere(0); ///ne pas mettre la ponderation au debut du graphe
     setIndice(0); ///ne pas mettre les indices des le debut
+    setChoixcoul('1'); /// met l'affichage des sommets par degres par default
     std::ifstream ifs{nomFichier};
             if (!ifs)
                 throw std::runtime_error( "Impossible d'ouvrir en lecture " + nomFichier );
@@ -147,6 +148,15 @@ void Graphe::setIndice(bool test)
     m_indice=test;
 }
 
+char Graphe::getChoixcoul() const
+{
+    return m_choixcoul;
+}
+
+void Graphe::setChoixcoul(char choix)
+{
+    m_choixcoul=choix;
+}
 
  void Graphe::DeterminerAdjacance()
 {
@@ -569,13 +579,15 @@ void Graphe::afficher_Ci()
 
 void Graphe::afficherGraphe()
 {
+
     system("cls");
     Svgfile svgout;
+    afficherColoration(svgout);
         ///placer les sommets
 
         for(size_t i=0; i<m_sommets.size();i++)
         {
-            svgout.addDisk(m_sommets[i]->getX()*100 , m_sommets[i]->getY()*100, 5, "blue");
+            svgout.addDisk(m_sommets[i]->getX()*100 , m_sommets[i]->getY()*100, 5, m_sommets[i]->getCouleur());
             ///afficher les lettres
             svgout.addText(m_sommets[i]->getX()*100 , m_sommets[i]->getY()*100-5, m_sommets[i]->getNom(),"black" );
         }
@@ -645,6 +657,177 @@ void Graphe::afficherIndices(Svgfile &svgout)
                 svgout.addText(m_sommets[i]->getX()*100-30, m_sommets[i]->getY()*100+61, m_sommets[i]->getCi(),"purple" );
             }
         }
+
+}
+
+void Graphe::afficherColoration(Svgfile &svgout)
+{
+    int maxi=0;
+    int inter=0;
+        if(getChoixcoul()=='1') /// coloration par Cd
+        {
+            for(size_t i=0; i<getOrdre();i++)
+            {
+                if(m_sommets[i]->getDegre()==0)
+                {
+                    m_sommets[i]->setCouleur("yellow");
+                }
+                if(m_sommets[i]->getDegre()==1)
+                {
+                    m_sommets[i]->setCouleur("cyan");
+                }
+                if(m_sommets[i]->getDegre()==2)
+                {
+                    m_sommets[i]->setCouleur("green");
+                }
+                if(m_sommets[i]->getDegre()==3)
+                {
+                    m_sommets[i]->setCouleur("blue");
+                }
+                if(m_sommets[i]->getDegre()==4)
+                {
+                    m_sommets[i]->setCouleur("red");
+                }
+
+            }
+
+        }
+
+        if(getChoixcoul()=='2') /// coloration par Cvp
+        {
+            for(size_t i=0; i<getOrdre();i++)
+            {
+
+                if(maxi<m_sommets[i]->getCvp())   ///trouver la valeur max
+                {
+                    maxi=m_sommets[i]->getCvp();
+                }
+
+            }
+
+            inter=maxi/6;    ///car 6 couleurs
+
+            for(size_t i=0; i<getOrdre();i++)
+            {
+                if(0<=m_sommets[i]->getCvp()<inter)
+                {
+                    m_sommets[i]->setCouleur("cyan");
+                }
+                if(inter<=m_sommets[i]->getCvp()<inter*2)
+                {
+                    m_sommets[i]->setCouleur("blue");
+                }
+                if(inter*2<=m_sommets[i]->getCvp()<inter*3)
+                {
+                    m_sommets[i]->setCouleur("green");
+                }
+                if(inter*3<=m_sommets[i]->getCvp()<inter*4)
+                {
+                    m_sommets[i]->setCouleur("yellow");
+                }
+                if(inter*4<=m_sommets[i]->getCvp()<inter*5)
+                {
+                    m_sommets[i]->setCouleur("orange");
+                }
+                if(inter*5<=m_sommets[i]->getCvp()<maxi)
+                {
+                    m_sommets[i]->setCouleur("red");
+                }
+
+            }
+        }
+
+        if(getChoixcoul()=='3') /// coloration par Cp
+        {
+            for(size_t i=0; i<getOrdre();i++)
+            {
+
+                if(maxi<m_sommets[i]->getCp())   ///trouver la valeur max
+                {
+                    maxi=m_sommets[i]->getCp();
+                }
+
+            }
+
+            inter=maxi/6;    ///car 6 couleurs
+
+            for(size_t i=0; i<getOrdre();i++)
+            {
+                if(0<=m_sommets[i]->getCp()<inter)
+                {
+                    m_sommets[i]->setCouleur("cyan");
+                }
+                if(inter<=m_sommets[i]->getCp()<inter*2)
+                {
+                    m_sommets[i]->setCouleur("blue");
+                }
+                if(inter*2<=m_sommets[i]->getCp()<inter*3)
+                {
+                    m_sommets[i]->setCouleur("green");
+                }
+                if(inter*3<=m_sommets[i]->getCp()<inter*4)
+                {
+                    m_sommets[i]->setCouleur("yellow");
+                }
+                if(inter*4<=m_sommets[i]->getCp()<inter*5)
+                {
+                    m_sommets[i]->setCouleur("orange");
+                }
+                if(inter*5<=m_sommets[i]->getCp()<maxi)
+                {
+                    m_sommets[i]->setCouleur("red");
+                }
+
+            }
+
+        }
+        if(getChoixcoul()=='4') /// coloration par Ci
+        {
+            for(size_t i=0; i<getOrdre();i++)
+            {
+
+                if(maxi<m_sommets[i]->getCi())   ///trouver la valeur max
+                {
+                    maxi=m_sommets[i]->getCi();
+                }
+
+            }
+
+            inter=maxi/6;    ///car 6 couleurs
+
+            for(size_t i=0; i<getOrdre();i++)
+            {
+                if(0<=m_sommets[i]->getCi()<inter)
+                {
+                    m_sommets[i]->setCouleur("cyan");
+                }
+                if(inter<=m_sommets[i]->getCi()<inter*2)
+                {
+                    m_sommets[i]->setCouleur("blue");
+                }
+                if(inter*2<=m_sommets[i]->getCi()<inter*3)
+                {
+                    m_sommets[i]->setCouleur("green");
+                }
+                if(inter*3<=m_sommets[i]->getCi()<inter*4)
+                {
+                    m_sommets[i]->setCouleur("yellow");
+                }
+                if(inter*4<=m_sommets[i]->getCi()<inter*5)
+                {
+                    m_sommets[i]->setCouleur("orange");
+                }
+                if(inter*5<=m_sommets[i]->getCi()<maxi)
+                {
+                    m_sommets[i]->setCouleur("red");
+                }
+
+            }
+
+        }
+
+        ///placer les sommets
+
 
 }
 
@@ -939,3 +1122,4 @@ void Graphe::comparaison()
 
     }
 }
+

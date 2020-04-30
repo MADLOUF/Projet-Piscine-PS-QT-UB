@@ -50,6 +50,14 @@ std::string Sommet::getNom ()const
 {
     return m_nom;
 }
+std::string Sommet::getCouleur ()const
+{
+    return m_couleur;
+}
+void Sommet::setCouleur(std::string C)
+{
+    m_couleur=C;
+}
 int Sommet::getMarquage ()const
 {
     return m_marquage;

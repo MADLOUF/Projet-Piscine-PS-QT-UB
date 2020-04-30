@@ -18,22 +18,40 @@ char menu()
     std::cout<<"7. Desactiver la ponderation"<<std::endl;
     std::cout<<"8. Activer les indices des sommets"<<std::endl;
     std::cout<<"9. Desactiver les indices des sommets"<<std::endl;
+    std::cout<<"A.Coloration des sommets"<<std::endl;
+
 
     do
     {
         std::cin>>choix;
-    }while(choix != '1' && choix != '2' && choix != '3' && choix != '4' && choix != '5' && choix != '6' && choix != '7' && choix!= '8'&& choix!= '9');
+    }while(choix != '1' && choix != '2' && choix != '3' && choix != '4' && choix != '5' && choix != '6' && choix != '7' && choix!= '8' && choix!= '9' && choix!= 'A');
 
     return choix;
 }
 
+char menu2()
+{
+    system("cls");
+    char choix;
+    std::cout<<"1. Centralit\202 de degres"<<std::endl;
+    std::cout<<"2. Centralit\202 de vecteur propre"<<std::endl;
+    std::cout<<"3. Centralit\202 de proximit\202"<<std::endl;
+    std::cout<<"4. Centralit\202 d'intermediarit\202"<<std::endl;
 
+    do
+    {
+        std::cin>>choix;
+    }while(choix != '1' && choix != '2' && choix != '3' && choix != '4');
+
+    return choix;
+}
 
 
 int main()
 {
     Graphe graphe;
     char choix;
+    char choix2;
     bool quit = 0;
 
     int test=0;
@@ -132,6 +150,12 @@ int main()
                         std::cout<<std::endl;
                         std::cout<<"Indices enlev\202e"<<std::endl;
                         std::cout<<std::endl;
+                        system("pause");
+                        break;
+
+            case 'A' :  choix2=menu2();
+                        graphe.setChoixcoul(choix2);
+                        graphe.afficherGraphe();
                         system("pause");
                         break;
 

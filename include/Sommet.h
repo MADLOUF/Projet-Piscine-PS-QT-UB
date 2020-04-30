@@ -16,6 +16,7 @@ class Sommet
         std::vector<int> m_adjacents;
         int m_id;
         std::string m_nom;
+        std::string m_couleur;
         int m_x;
         int m_y;
         int m_marquage=0;
@@ -52,7 +53,9 @@ class Sommet
         double getCp()const;
         double getCp2()const;
         double getCpnn()const;
-        std::string getNom () const;
+        std::string getNom() const;
+        std::string getCouleur() const;
+        void setCouleur(std::string C);
         void Adjacent(int ID);
         void Erase_Adjacent();
         void setMarquage(int coul);
