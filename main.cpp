@@ -34,15 +34,16 @@ char menu2()
 {
     system("cls");
     char choix;
-    std::cout<<"1. Centralit\202 de degres"<<std::endl;
-    std::cout<<"2. Centralit\202 de vecteur propre"<<std::endl;
-    std::cout<<"3. Centralit\202 de proximit\202"<<std::endl;
-    std::cout<<"4. Centralit\202 d'intermediarit\202"<<std::endl;
+    std::cout<<"1. Degres de sommet"<<std::endl;
+    std::cout<<"2. Centralit\202 de degres"<<std::endl;
+    std::cout<<"3. Centralit\202 de vecteur propre"<<std::endl;
+    std::cout<<"4. Centralit\202 de proximit\202"<<std::endl;
+    std::cout<<"5. Centralit\202 d'intermediarit\202"<<std::endl;
 
     do
     {
         std::cin>>choix;
-    }while(choix != '1' && choix != '2' && choix != '3' && choix != '4');
+    }while(choix != '1' && choix != '2' && choix != '3' && choix != '4'&& choix != '5');
 
     return choix;
 }

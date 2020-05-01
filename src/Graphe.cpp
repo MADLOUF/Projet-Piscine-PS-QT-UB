@@ -588,7 +588,7 @@ void Graphe::afficherGraphe()
         {
             svgout.addDisk(m_sommets[i]->getX()*100 , m_sommets[i]->getY()*100, 5, m_sommets[i]->getCouleur());
             ///afficher les lettres
-            svgout.addText(m_sommets[i]->getX()*100 , m_sommets[i]->getY()*100-5, m_sommets[i]->getNom(),"black" );
+            svgout.addText(m_sommets[i]->getX()*100+5 , m_sommets[i]->getY()*100-5, m_sommets[i]->getNom(),"black" );
         }
 
         ///placer les arretes
@@ -599,10 +599,18 @@ void Graphe::afficherGraphe()
             s1 = m_arretes[i]->getID1();
             s2 = m_arretes[i]->getID2();
             svgout.addLine(m_sommets[s1]->getX()*100, m_sommets[s1]->getY()*100, m_sommets[s2]->getX()*100, m_sommets[s2]->getY()*100, "black");
-            svgout.addText((m_sommets[s1]->getX()*100+ m_sommets[s2]->getX()*100)/2, (m_sommets[s1]->getY()*100+ m_sommets[s2]->getY()*100)/2, i,"green" );
+            svgout.addText((m_sommets[s1]->getX()*100+ m_sommets[s2]->getX()*100)/2+18, (m_sommets[s1]->getY()*100+ m_sommets[s2]->getY()*100)/2, i,"green" );
         }
-        svgout.addRect(600,275,15,15,"green","black");
-        svgout.addText(625,288,"ID de l'arete","black");
+
+        ///LEGENDE
+        svgout.addDisk(607,330, 7,"cyan" );  ///disque
+        svgout.addDisk(607,354, 7,"blue" );
+        svgout.addDisk(607,378, 7,"green" );
+        svgout.addDisk(607,402, 7,"yellow" );
+        svgout.addDisk(607,426, 7,"orange" );
+        svgout.addDisk(607,450, 7,"red" );
+        svgout.addRect(600,467,15,15,"green","black"); ///legende carré vert
+        svgout.addText(625,480,"ID de l'arete","black");
 
         ///affiche ponderation si activé
         if(getPondere()==1)
@@ -638,8 +646,8 @@ void Graphe::afficherPonderation(Svgfile &svgout)
             s2 = m_arretes[i]->getID2();
             svgout.addText((m_sommets[s1]->getX()*100+ m_sommets[s2]->getX()*100)/2-30, (m_sommets[s1]->getY()*100+ m_sommets[s2]->getY()*100)/2, m_arretes[i]->getPoids(),"red" );
         }
-        svgout.addRect(600,300,15,15,"red","black");
-        svgout.addText(625,313,"Poids de l'arete","black");
+        svgout.addRect(600,492,15,15,"red","black");
+        svgout.addText(625,505,"Poids de l'arete","black");
 
 }
 
@@ -667,17 +675,17 @@ void Graphe::afficherColoration(Svgfile &svgout)
 {
     double maxi=0;
     double inter=0;
-        if(getChoixcoul()=='1') /// coloration par Cd
+        if(getChoixcoul()=='1') /// coloration par degres
         {
             for(int i=0; i<getOrdre();i++)
             {
                 if(m_sommets[i]->getDegre()==0)
                 {
-                    m_sommets[i]->setCouleur("yellow");
+                    m_sommets[i]->setCouleur("cyan");
                 }
                 if(m_sommets[i]->getDegre()==1)
                 {
-                    m_sommets[i]->setCouleur("cyan");
+                    m_sommets[i]->setCouleur("blue");
                 }
                 if(m_sommets[i]->getDegre()==2)
                 {
@@ -685,19 +693,87 @@ void Graphe::afficherColoration(Svgfile &svgout)
                 }
                 if(m_sommets[i]->getDegre()==3)
                 {
-                    m_sommets[i]->setCouleur("blue");
+                    m_sommets[i]->setCouleur("yellow");
                 }
                 if(m_sommets[i]->getDegre()==4)
+                {
+                    m_sommets[i]->setCouleur("orange");
+                }
+                if(m_sommets[i]->getDegre()==5)
                 {
                     m_sommets[i]->setCouleur("red");
                 }
 
             }
+            svgout.addText(625,336,"0 voisin","black");
+            svgout.addText(625,360,"1 voisin","black");
+            svgout.addText(625,384,"2 voisins","black");
+            svgout.addText(625,408,"3 voisins","black");
+            svgout.addText(625,432,"4 voisins","black");
+            svgout.addText(625,456,"5 voisins","black");
 
         }
 
-        if(getChoixcoul()=='2') /// coloration par Cvp
+        if(getChoixcoul()=='2') /// coloration par Cd
         {
+            Cd();
+            for(int i=0; i<getOrdre();i++)
+            {
+
+                if(maxi<m_sommets[i]->getCd())   ///trouver la valeur max
+                {
+                    maxi=m_sommets[i]->getCd();
+                }
+
+            }
+
+            inter=maxi/6;    ///car 6 couleurs
+
+            for(int i=0; i<getOrdre();i++)
+            {
+                if(0<=m_sommets[i]->getCd() && m_sommets[i]->getCd()<inter)
+                {
+                    m_sommets[i]->setCouleur("cyan");
+                }
+                if(inter<=m_sommets[i]->getCd() && m_sommets[i]->getCd()<inter*2)
+                {
+                    m_sommets[i]->setCouleur("blue");
+                }
+                if(inter*2<=m_sommets[i]->getCd() && m_sommets[i]->getCd()<inter*3)
+                {
+                    m_sommets[i]->setCouleur("green");
+                }
+                if(inter*3<=m_sommets[i]->getCd() && m_sommets[i]->getCd()<inter*4)
+                {
+                    m_sommets[i]->setCouleur("yellow");
+                }
+                if(inter*4<=m_sommets[i]->getCd() && m_sommets[i]->getCd()<inter*5)
+                {
+                    m_sommets[i]->setCouleur("orange");
+                }
+                if(inter*5<=m_sommets[i]->getCd() && m_sommets[i]->getCd()<=maxi)
+                {
+                    m_sommets[i]->setCouleur("red");
+                }
+
+            }
+            svgout.addText(625,336,0,"black");
+            svgout.addText(725,336,inter,"black");
+            svgout.addText(625,360,inter,"black");
+            svgout.addText(725,360,inter*2,"black");
+            svgout.addText(625,384,inter*2,"black");
+            svgout.addText(725,384,inter*3,"black");
+            svgout.addText(625,408,inter*3,"black");
+            svgout.addText(725,408,inter*4,"black");
+            svgout.addText(625,432,inter*4,"black");
+            svgout.addText(725,432,inter*5,"black");
+            svgout.addText(625,456,inter*5,"black");
+            svgout.addText(725,456,maxi,"black");
+        }
+
+        if(getChoixcoul()=='3') /// coloration par Cvp
+        {
+            Cvp();
             for(int i=0; i<getOrdre();i++)
             {
 
@@ -732,16 +808,29 @@ void Graphe::afficherColoration(Svgfile &svgout)
                 {
                     m_sommets[i]->setCouleur("orange");
                 }
-                if(inter*5<=m_sommets[i]->getCvp() && m_sommets[i]->getCvp()<maxi)
+                if(inter*5<=m_sommets[i]->getCvp() && m_sommets[i]->getCvp()<=maxi)
                 {
                     m_sommets[i]->setCouleur("red");
                 }
 
             }
+            svgout.addText(625,336,0,"black");
+            svgout.addText(725,336,inter,"black");
+            svgout.addText(625,360,inter,"black");
+            svgout.addText(725,360,inter*2,"black");
+            svgout.addText(625,384,inter*2,"black");
+            svgout.addText(725,384,inter*3,"black");
+            svgout.addText(625,408,inter*3,"black");
+            svgout.addText(725,408,inter*4,"black");
+            svgout.addText(625,432,inter*4,"black");
+            svgout.addText(725,432,inter*5,"black");
+            svgout.addText(625,456,inter*5,"black");
+            svgout.addText(725,456,maxi,"black");
         }
+
         if(getPondere()==1)
         {
-            if(getChoixcoul()=='3') /// coloration par Cp
+            if(getChoixcoul()=='4') /// coloration par Cp
             {
                 Cp();  ///l'appeler car sinon il s'effectue pas tant qu'on l'affiche pas
                 for(int i=0; i<getOrdre();i++)
@@ -780,15 +869,28 @@ void Graphe::afficherColoration(Svgfile &svgout)
                     {
                         m_sommets[i]->setCouleur("orange");
                     }
-                    if(inter*5<=m_sommets[i]->getCp() && m_sommets[i]->getCp()<maxi)
+                    if(inter*5<=m_sommets[i]->getCp() && m_sommets[i]->getCp()<=maxi)
                     {
                         m_sommets[i]->setCouleur("red");
                     }
 
                 }
+                svgout.addText(625,336,0,"black");
+                svgout.addText(725,336,inter,"black");
+                svgout.addText(625,360,inter,"black");
+                svgout.addText(725,360,inter*2,"black");
+                svgout.addText(625,384,inter*2,"black");
+                svgout.addText(725,384,inter*3,"black");
+                svgout.addText(625,408,inter*3,"black");
+                svgout.addText(725,408,inter*4,"black");
+                svgout.addText(625,432,inter*4,"black");
+                svgout.addText(725,432,inter*5,"black");
+                svgout.addText(625,456,inter*5,"black");
+                svgout.addText(725,456,maxi,"black");
 
             }
-            if(getChoixcoul()=='4') /// coloration par Ci
+
+            if(getChoixcoul()=='5') /// coloration par Ci
             {
                 Ci();
                 for(int i=0; i<getOrdre();i++)
@@ -825,12 +927,24 @@ void Graphe::afficherColoration(Svgfile &svgout)
                     {
                         m_sommets[i]->setCouleur("orange");
                     }
-                    if(inter*5<=m_sommets[i]->getCi() && m_sommets[i]->getCi()<maxi)
+                    if(inter*5<=m_sommets[i]->getCi() && m_sommets[i]->getCi()<=maxi)
                     {
                         m_sommets[i]->setCouleur("red");
                     }
 
                 }
+                svgout.addText(625,336,0,"black");
+                svgout.addText(725,336,inter,"black");
+                svgout.addText(625,360,inter,"black");
+                svgout.addText(725,360,inter*2,"black");
+                svgout.addText(625,384,inter*2,"black");
+                svgout.addText(725,384,inter*3,"black");
+                svgout.addText(625,408,inter*3,"black");
+                svgout.addText(725,408,inter*4,"black");
+                svgout.addText(625,432,inter*4,"black");
+                svgout.addText(725,432,inter*5,"black");
+                svgout.addText(625,456,inter*5,"black");
+                svgout.addText(725,456,maxi,"black");
 
 
             }
