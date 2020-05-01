@@ -599,7 +599,6 @@ void Graphe::afficher_Ci()
 void Graphe::afficherGraphe()
 {
 
-    system("cls");
     Svgfile svgout;
     afficherColoration(svgout);
         ///placer les sommets
@@ -1098,8 +1097,6 @@ void Graphe::vulnerabilite()
         Cp();
         Ci();
         }
-
-
         afficherGraphe();
         std::cout<<"Vous avez supprim\202 l'arete "<<a1<<". Pour supprimer une autre arete, tapez 0 sinon tapez 1"<<std::endl;
         std::cin>>test;

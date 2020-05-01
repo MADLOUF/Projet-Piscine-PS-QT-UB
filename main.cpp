@@ -19,7 +19,7 @@ char menu()
     std::cout<<"7. Desactiver la ponderation"<<std::endl;
     std::cout<<"8. Activer les indices des sommets"<<std::endl;
     std::cout<<"9. Desactiver les indices des sommets"<<std::endl;
-    std::cout<<"A.Coloration des sommets"<<std::endl;
+    std::cout<<"A. Coloration des sommets"<<std::endl;
 
 
     do
@@ -61,7 +61,7 @@ int main()
     std::string nomFichier1;
     std::string nomFichier2;
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); ///internet
-    SetConsoleTextAttribute(hConsole,125);
+    SetConsoleTextAttribute(hConsole,10);
 
 
 
@@ -121,6 +121,7 @@ int main()
             case '5' :  std::cout<<"test"<<std::endl;
                         graphe.vulnerabilite(); ///rappeler l'affichage pour mettre le num des aretes a jour
                         std::cout<<"test3"<<std::endl;
+                        system("pause");
                         break;
 
             case '6' :  std::cout<<std::endl;
