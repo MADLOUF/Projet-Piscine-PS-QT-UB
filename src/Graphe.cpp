@@ -469,38 +469,35 @@ void Graphe::Cp()
 
     for(int i=0;i<getOrdre();i++)///Parcours de la totalité des sommets du graphe
     {
-     for(int y =0;y<getOrdre();y++)
-     {
-         if (y==i)///Y=/=i
-         {
-             if(y==getOrdre()-1)
-             {
-                 break;
-             }
-             else
-             {
-                 y++;
-             }
-         }
+        if(m_sommets[i]->getDegre()!=0)
+        {
+            for(int y =0;y<getOrdre();y++)
+            {
+                if(y!=i&&m_sommets[y]->getDegre()!=0)
+                {
+                            PCChemins=DijkstraModif(i,y);///On recupere le trajet du plus court chemin avec la longueur situé en 0
+                            Dij=PCChemins[0][0];
+                            //std::cout<<"i :"<<i<<" y: "<<y<<"Longueur :"<<PCChemins[0][0]<<std::endl;
+                            PCChemins.clear();
+                            Somme=Somme+Dij;
+                            Dij=0;
 
-         PCChemins=DijkstraModif(i,y);///On recupere le trajet du plus court chemin avec la longueur situé en 0
+                }
+            }
+            Cnn=(1/Somme);
+            C=((double)getOrdre()-1)/Somme;
+            Somme=0;
+            m_sommets[i]->setCp(C);
+            m_sommets[i]->setCpnn(Cnn);
+        }
+        else
+        {
+            m_sommets[i]->setCp(0);
+            m_sommets[i]->setCpnn(0);
+        }
 
-         Dij=PCChemins[0][0];
-         //std::cout<<"i :"<<i<<" y: "<<y<<"Longueur :"<<PCChemins[0][0]<<std::endl;
-         PCChemins.clear();
-         Somme=Somme+Dij;
-         Dij=0;
-
-
-     }
-     Cnn=(1/Somme);
-     C=((double)getOrdre()-1)/Somme;
-     Somme=0;
-     m_sommets[i]->setCp(C);
-     m_sommets[i]->setCpnn(Cnn);
 
     }
-
 }
 
 void Graphe::afficher_Cp()
@@ -528,16 +525,21 @@ void Graphe::Ci()
     std::vector<std::vector<int>> PCChemins;
     for(int i=0;i<getOrdre();i++)
     {
-
-
-    for (int j=0;j<=(getOrdre()-2);++j)///Fonctionne uniquement si l'ID des sommets commence par 0
-    {
-        for (int k=1+j;k<=getOrdre()-1;++k)
+        if(m_sommets[i]->getDegre()!=0)
         {
+            for (int j=0;j<=(getOrdre()-2);++j)///Fonctionne uniquement si l'ID des sommets commence par 0
+    {
 
-            PCChemins=DijkstraModif(j,k);
-            for(size_t x=0;x<PCChemins.size();x++)
+
+        if(m_sommets[j]->getDegre()!=0)
+        {
+            for (int k=1+j;k<=getOrdre()-1;++k)
             {
+                if(m_sommets[k]->getDegre()!=0)
+                {
+                    PCChemins=DijkstraModif(j,k);
+                for(size_t x=0;x<PCChemins.size();x++)
+                {
                 for(size_t y=2;y<PCChemins[x].size();y++)
                 {
                     if(PCChemins[x][y]==i)
@@ -545,20 +547,38 @@ void Graphe::Ci()
                         n_pccI++;
                     }
                 }
+                }
+                n_pccJK=PCChemins.size();
+                Somme=Somme+(n_pccI/n_pccJK);
+                n_pccJK=0;
+                n_pccI=0;
+                PCChemins.clear();
+                }
+                n_pccJK=0;
+                n_pccI=0;
+                PCChemins.clear();
+
+
             }
-            n_pccJK=PCChemins.size();
-            Somme=Somme+(n_pccI/n_pccJK);
-            n_pccJK=0;
-            n_pccI=0;
-            PCChemins.clear();
+
         }
+
     }
     Cnn=(2*Somme);
     C=(2*Somme)/(pow((double)getOrdre(),2.0)-(3*(double)getOrdre())+2);
     m_sommets[i]->setCinn(Cnn);
     m_sommets[i]->setCi(C);
     Somme=0;
-}
+
+        }
+        else
+        {
+             m_sommets[i]->setCinn(0);
+             m_sommets[i]->setCi(0);
+        }
+
+
+    }
 
 
 }
@@ -1041,16 +1061,16 @@ void Graphe::vulnerabilite()
     int test=0;
     int a1=0;
     std::vector<int> ListeADJ;
-    Cd();
-    Cvp();
-    if(getPondere()==1)
-    {
-        Ci();
-        Cp();
-    }
 
     do
     {
+        Cvp();
+        Cd();
+        if(getPondere()==1)
+        {
+        Cp();
+        Ci();
+        }
 
         std::cout<<"Rentrez le numero de l'arete que vous voulez supprimer"<<std::endl;
         std::cin>>a1;
@@ -1071,6 +1091,13 @@ void Graphe::vulnerabilite()
             m_sommets[i]->setCi2(m_sommets[i]->getCi());
             m_sommets[i]->setCp2(m_sommets[i]->getCp());
         }
+        Cvp();
+        Cd();
+        if(getPondere()==1)
+        {
+        Cp();
+        Ci();
+        }
 
 
         afficherGraphe();
@@ -1078,16 +1105,7 @@ void Graphe::vulnerabilite()
         std::cin>>test;
     }while(test==0);
 
-    Cvp();
-    Cd();
-    if(getPondere()==1)
-    {
-        std::cout<<"test1"<<std::endl;
-        Cp();
-        std::cout<<"test2"<<std::endl;
-        Ci();
-        std::cout<<"test3"<<std::endl;
-    }
+
 
 
     comparaison();
