@@ -1,4 +1,5 @@
 #include <iostream>
+#include <windows.h>
 #include "Graphe.h"
 #include "Sommet.h"
 #include "Arrete.h"
@@ -58,6 +59,9 @@ int main()
 
     std::string nomFichier1;
     std::string nomFichier2;
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); ///internet
+    SetConsoleTextAttribute(hConsole,125);
+
 
 
     do{

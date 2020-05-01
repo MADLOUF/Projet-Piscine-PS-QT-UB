@@ -104,7 +104,6 @@ void Graphe::Load_ponderation(std::string nomFichier)
                 ifs>>ID;
                 ifs>>poids;
                 m_arretes[ID]->setPoids(poids);
-                std::cout<<std::endl;
                 if (!ifs)
                 throw std::runtime_error( "Probleme lecture poid arrete" );
 
@@ -602,6 +601,8 @@ void Graphe::afficherGraphe()
             svgout.addLine(m_sommets[s1]->getX()*100, m_sommets[s1]->getY()*100, m_sommets[s2]->getX()*100, m_sommets[s2]->getY()*100, "black");
             svgout.addText((m_sommets[s1]->getX()*100+ m_sommets[s2]->getX()*100)/2, (m_sommets[s1]->getY()*100+ m_sommets[s2]->getY()*100)/2, i,"green" );
         }
+        svgout.addRect(600,275,15,15,"green","black");
+        svgout.addText(625,288,"ID de l'arete","black");
 
         ///affiche ponderation si activé
         if(getPondere()==1)
@@ -637,6 +638,8 @@ void Graphe::afficherPonderation(Svgfile &svgout)
             s2 = m_arretes[i]->getID2();
             svgout.addText((m_sommets[s1]->getX()*100+ m_sommets[s2]->getX()*100)/2-30, (m_sommets[s1]->getY()*100+ m_sommets[s2]->getY()*100)/2, m_arretes[i]->getPoids(),"red" );
         }
+        svgout.addRect(600,300,15,15,"red","black");
+        svgout.addText(625,313,"Poids de l'arete","black");
 
 }
 
@@ -921,7 +924,6 @@ void Graphe :: rechercher_afficher_CC()
 }
 void Graphe::vulnerabilite()
 {
-    std::cout<<"test2"<<std::endl;
     int test=0;
     int a1=0;
     std::vector<int> ListeADJ;
@@ -935,7 +937,7 @@ void Graphe::vulnerabilite()
 
     do
     {
-        std::cout<<"test4"<<std::endl;
+
         std::cout<<"Rentrez le numero de l'arete que vous voulez supprimer"<<std::endl;
         std::cin>>a1;
         m_arretes.erase (m_arretes.begin()+a1);
@@ -962,16 +964,19 @@ void Graphe::vulnerabilite()
         std::cin>>test;
     }while(test==0);
 
-        Cvp();
-        Cd();
-        if(getPondere()==1)
-        {
-            Ci();
-            Cp();
-        }
+    Cvp();
+    Cd();
+    if(getPondere()==1)
+    {
+        std::cout<<"test1"<<std::endl;
+        Cp();
+        std::cout<<"test2"<<std::endl;
+        Ci();
+        std::cout<<"test3"<<std::endl;
+    }
 
 
-        comparaison();
+    comparaison();
 
     rechercher_afficher_CC();
 
