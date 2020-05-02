@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="800">
 
-<text x="720" y="506" fill="black" >0</text>
-<text x="820" y="506" fill="black" >0.0869565</text>
-<text x="720" y="530" fill="black" >0.0869565</text>
-<text x="820" y="530" fill="black" >0.173913</text>
-<text x="720" y="554" fill="black" >0.173913</text>
-<text x="820" y="554" fill="black" >0.26087</text>
-<text x="720" y="578" fill="black" >0.26087</text>
-<text x="820" y="578" fill="black" >0.347826</text>
-<text x="720" y="602" fill="black" >0.347826</text>
-<text x="820" y="602" fill="black" >0.434783</text>
-<text x="720" y="626" fill="black" >0.434783</text>
-<text x="820" y="626" fill="black" >0.521739</text>
+<text x="720" y="506" fill="black" >0 voisin</text>
+<text x="720" y="530" fill="black" >1 voisin</text>
+<text x="720" y="554" fill="black" >2 voisins</text>
+<text x="720" y="578" fill="black" >3 voisins</text>
+<text x="720" y="602" fill="black" >4 voisins</text>
+<text x="720" y="626" fill="black" >5 voisins</text>
 <line x1="0" y1="0" x2="1000" y2="0" stroke="lightgrey" />
 <text x="5" y="-5" fill="lightgrey" >0</text>
 <line x1="0" y1="100" x2="1000" y2="100" stroke="lightgrey" />
@@ -53,53 +47,53 @@
 <text x="905" y="15" fill="lightgrey" >900</text>
 <line x1="1000" y1="0" x2="1000" y2="800" stroke="lightgrey" />
 <text x="1005" y="15" fill="lightgrey" >1000</text>
-<circle cx="400" cy="400" r="5" fill="red" />
+<circle cx="400" cy="400" r="5" fill="purple" />
 <text x="405" y="395" fill="black" >A</text>
-<circle cx="500" cy="200" r="5" fill="green" />
+<circle cx="500" cy="200" r="5" fill="orange" />
 <text x="505" y="195" fill="black" >B</text>
-<circle cx="600" cy="300" r="5" fill="green" />
+<circle cx="600" cy="300" r="5" fill="orange" />
 <text x="605" y="295" fill="black" >C</text>
-<circle cx="600" cy="400" r="5" fill="green" />
+<circle cx="600" cy="400" r="5" fill="orange" />
 <text x="605" y="395" fill="black" >D</text>
-<circle cx="600" cy="500" r="5" fill="green" />
+<circle cx="600" cy="500" r="5" fill="orange" />
 <text x="605" y="495" fill="black" >E</text>
-<circle cx="500" cy="600" r="5" fill="blue" />
+<circle cx="500" cy="600" r="5" fill="yellow" />
 <text x="505" y="595" fill="black" >F</text>
-<circle cx="400" cy="600" r="5" fill="green" />
+<circle cx="400" cy="600" r="5" fill="orange" />
 <text x="405" y="595" fill="black" >G</text>
-<circle cx="300" cy="600" r="5" fill="green" />
+<circle cx="300" cy="600" r="5" fill="orange" />
 <text x="305" y="595" fill="black" >H</text>
-<circle cx="200" cy="500" r="5" fill="green" />
+<circle cx="200" cy="500" r="5" fill="orange" />
 <text x="205" y="495" fill="black" >I</text>
-<circle cx="200" cy="400" r="5" fill="green" />
+<circle cx="200" cy="400" r="5" fill="orange" />
 <text x="205" y="395" fill="black" >J</text>
-<circle cx="200" cy="300" r="5" fill="green" />
+<circle cx="200" cy="300" r="5" fill="orange" />
 <text x="205" y="295" fill="black" >K</text>
-<circle cx="300" cy="200" r="5" fill="green" />
+<circle cx="300" cy="200" r="5" fill="orange" />
 <text x="305" y="195" fill="black" >L</text>
-<circle cx="400" cy="200" r="5" fill="green" />
+<circle cx="400" cy="200" r="5" fill="orange" />
 <text x="405" y="195" fill="black" >M</text>
-<circle cx="600" cy="100" r="5" fill="blue" />
+<circle cx="600" cy="100" r="5" fill="yellow" />
 <text x="605" y="95" fill="black" >N</text>
-<circle cx="700" cy="100" r="5" fill="blue" />
+<circle cx="700" cy="100" r="5" fill="green" />
 <text x="705" y="95" fill="black" >O</text>
-<circle cx="700" cy="400" r="5" fill="blue" />
+<circle cx="700" cy="400" r="5" fill="green" />
 <text x="705" y="395" fill="black" >P</text>
-<circle cx="400" cy="700" r="5" fill="blue" />
+<circle cx="400" cy="700" r="5" fill="green" />
 <text x="405" y="695" fill="black" >Q</text>
-<circle cx="300" cy="700" r="5" fill="blue" />
+<circle cx="300" cy="700" r="5" fill="green" />
 <text x="305" y="695" fill="black" >R</text>
-<circle cx="100" cy="600" r="5" fill="cyan" />
+<circle cx="100" cy="600" r="5" fill="blue" />
 <text x="105" y="595" fill="black" >S</text>
-<circle cx="100" cy="400" r="5" fill="cyan" />
+<circle cx="100" cy="400" r="5" fill="blue" />
 <text x="105" y="395" fill="black" >T</text>
-<circle cx="100" cy="300" r="5" fill="cyan" />
+<circle cx="100" cy="300" r="5" fill="blue" />
 <text x="105" y="295" fill="black" >U</text>
-<circle cx="200" cy="200" r="5" fill="blue" />
+<circle cx="200" cy="200" r="5" fill="yellow" />
 <text x="205" y="195" fill="black" >V</text>
-<circle cx="100" cy="100" r="5" fill="cyan" />
+<circle cx="100" cy="100" r="5" fill="blue" />
 <text x="105" y="95" fill="black" >W</text>
-<circle cx="400" cy="100" r="5" fill="blue" />
+<circle cx="400" cy="100" r="5" fill="yellow" />
 <text x="405" y="95" fill="black" >X</text>
 <line x1="400" y1="400" x2="500" y2="200" stroke="black" />
 <text x="468" y="300" fill="green" >0</text>

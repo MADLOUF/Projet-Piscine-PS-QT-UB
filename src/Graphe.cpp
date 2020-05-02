@@ -602,7 +602,7 @@ void Graphe::afficherGraphe()
     Svgfile svgout;
     afficherColoration(svgout);
     svgout.addGrid();
-        ///placer les sommets
+    ///placer les sommets
 
         for(size_t i=0; i<m_sommets.size();i++)
         {
@@ -722,7 +722,7 @@ void Graphe::afficherPonderation(Svgfile &svgout)
             svgout.addText((m_sommets[s1]->getX()*100+ m_sommets[s2]->getX()*100)/2-30, (m_sommets[s1]->getY()*100+ m_sommets[s2]->getY()*100)/2, m_arretes[i]->getPoids(),"red" );
         }
         svgout.addRect(693,662,15,15,"red","black");
-        svgout.addText(725,776,"Poids de l'arete","black");
+        svgout.addText(720,676,"Poids de l'arete","black");
 
 }
 
@@ -777,6 +777,10 @@ void Graphe::afficherColoration(Svgfile &svgout)
                 if(m_sommets[i]->getDegre()==5)
                 {
                     m_sommets[i]->setCouleur("red");
+                }
+                if(m_sommets[i]->getDegre()>5)
+                {
+                    m_sommets[i]->setCouleur("purple");
                 }
 
             }
