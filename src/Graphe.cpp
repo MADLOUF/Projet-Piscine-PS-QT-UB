@@ -601,6 +601,7 @@ void Graphe::afficherGraphe()
 
     Svgfile svgout;
     afficherColoration(svgout);
+    svgout.addTriangle(600,600,600,650,640,625,"black",40,"purple");
         ///placer les sommets
 
         for(size_t i=0; i<m_sommets.size();i++)
@@ -619,7 +620,62 @@ void Graphe::afficherGraphe()
             s2 = m_arretes[i]->getID2();
             svgout.addLine(m_sommets[s1]->getX()*100, m_sommets[s1]->getY()*100, m_sommets[s2]->getX()*100, m_sommets[s2]->getY()*100, "black");
             svgout.addText((m_sommets[s1]->getX()*100+ m_sommets[s2]->getX()*100)/2+18, (m_sommets[s1]->getY()*100+ m_sommets[s2]->getY()*100)/2, i,"green" );
+
+            ///placer les fleches si orienté
+            if(m_oriente==1)
+            {
+                if(m_sommets[s1]->getX()== m_sommets[s2]->getX())
+                {
+                    if(m_sommets[s1]->getY() < m_sommets[s2]->getY())///vers le bas
+                    {
+                        svgout.addTriangle(m_sommets[s2]->getX()*100,m_sommets[s2]->getY()*100,m_sommets[s2]->getX()*100+5,m_sommets[s2]->getY()*100-7,m_sommets[s2]->getX()*100-5,m_sommets[s2]->getY()*100-7, "black");
+                    }
+                    if(m_sommets[s1]->getY() > m_sommets[s2]->getY()) ///vers le haut
+                    {
+                        svgout.addTriangle(m_sommets[s2]->getX()*100,m_sommets[s2]->getY()*100,m_sommets[s2]->getX()*100+5,m_sommets[s2]->getY()*100+7,m_sommets[s2]->getX()*100-5,m_sommets[s2]->getY()*100+7, "black");
+                    }
+                }
+                if(m_sommets[s1]->getY()== m_sommets[s2]->getY())
+                {
+                    if(m_sommets[s1]->getX() < m_sommets[s2]->getX()) ///vers la droite
+                    {
+                        svgout.addTriangle(m_sommets[s2]->getX()*100,m_sommets[s2]->getY()*100,m_sommets[s2]->getX()*100-7,m_sommets[s2]->getY()*100+5,m_sommets[s2]->getX()*100-7,m_sommets[s2]->getY()*100-5, "black");
+                    }
+                    if(m_sommets[s1]->getX() > m_sommets[s2]->getX()) ///vers la gauche
+                    {
+                        svgout.addTriangle(m_sommets[s2]->getX()*100,m_sommets[s2]->getY()*100,m_sommets[s2]->getX()*100+7,m_sommets[s2]->getY()*100-5,m_sommets[s2]->getX()*100+7,m_sommets[s2]->getY()*100-5, "black");
+                    }
+
+                }
+                if(m_sommets[s1]->getX()> m_sommets[s2]->getX())  ///vecteur orienté vers la gauche
+                {
+                    if(m_sommets[s1]->getY() > m_sommets[s2]->getY()) ///diagonale haut gauche
+                    {
+                        svgout.addTriangle(m_sommets[s2]->getX()*100,m_sommets[s2]->getY()*100,m_sommets[s2]->getX()*100+9,m_sommets[s2]->getY()*100,m_sommets[s2]->getX()*100,m_sommets[s2]->getY()*100+9, "black");
+                    }
+                    if(m_sommets[s1]->getY() < m_sommets[s2]->getY()) ///diagonale bas gauche
+                    {
+                        svgout.addTriangle(m_sommets[s2]->getX()*100,m_sommets[s2]->getY()*100,m_sommets[s2]->getX()*100+9,m_sommets[s2]->getY()*100,m_sommets[s2]->getX()*100,m_sommets[s2]->getY()*100-9, "black");
+                    }
+
+                }
+                if(m_sommets[s1]->getX()< m_sommets[s2]->getX())  ///vecteur orienté vers la gauche
+                {
+                    if(m_sommets[s1]->getY() > m_sommets[s2]->getY()) ///diagonale haut droite
+                    {
+                        svgout.addTriangle(m_sommets[s2]->getX()*100,m_sommets[s2]->getY()*100,m_sommets[s2]->getX()*100-9,m_sommets[s2]->getY()*100,m_sommets[s2]->getX()*100,m_sommets[s2]->getY()*100+9, "black");
+                    }
+                    if(m_sommets[s1]->getY() < m_sommets[s2]->getY()) ///diagonale bas droite
+                    {
+                        svgout.addTriangle(m_sommets[s2]->getX()*100,m_sommets[s2]->getY()*100,m_sommets[s2]->getX()*100-9,m_sommets[s2]->getY()*100,m_sommets[s2]->getX()*100,m_sommets[s2]->getY()*100-9, "black");
+                    }
+
+                }
+
+            }
         }
+
+
 
         ///LEGENDE
         svgout.addDisk(607,330, 7,"cyan" );  ///disque

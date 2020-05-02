@@ -102,9 +102,9 @@ void Svgfile::addTriangle(double x1, double y1, double x2, double y2,
                           double x3, double y3, std::string colorFill)
 {
     m_ostrm << "<polygon points=\" "
-            << x1+50 << "," << y1+10 << " "
-            << x2+50 << "," << y2+10 << " "
-            << x3+50 << "," << y3+10
+            << x1 << "," << y1 << " "
+            << x2 << "," << y2 << " "
+            << x3 << "," << y3
             << "\" style=\"fill:" << colorFill
             << "\" />\n";
 }
