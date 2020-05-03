@@ -531,11 +531,11 @@ void Graphe::Ci()
     {
 
 
-        if(m_sommets[j]->getDegre()!=0)
+        if(m_sommets[j]->getDegre()!=0&&j!=i)
         {
             for (int k=1+j;k<=getOrdre()-1;++k)
             {
-                if(m_sommets[k]->getDegre()!=0)
+                if(m_sommets[k]->getDegre()!=0&&k!=i)
                 {
                     PCChemins=DijkstraModif(j,k);
                 for(size_t x=0;x<PCChemins.size();x++)
@@ -918,6 +918,7 @@ void Graphe::afficherColoration(Svgfile &svgout)
                     if(maxi < m_sommets[i]->getCp())   ///trouver la valeur max
                     {
                         maxi=m_sommets[i]->getCp();
+                        std::cout<<"Maxi : "<<maxi<<std::endl;
                     }
 
                 }
