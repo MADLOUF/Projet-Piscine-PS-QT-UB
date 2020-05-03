@@ -160,6 +160,15 @@ int main()
                         break;
 
             case 'A' :  choix2=menu2();
+                        if(graphe.getPondere()==0)
+                        {
+                            while(choix2=='4' || choix2=='5')
+                            {
+                                std::cout<<"Vous ne pouvez pas colorer en fonction de Ci et Cp car vous n'avez pas activ\202 la ponderation"<<std::endl;
+                                system("pause");
+                                choix2=menu2();
+                            }
+                        }
                         graphe.setChoixcoul(choix2);
                         graphe.afficherGraphe();
                         system("pause");

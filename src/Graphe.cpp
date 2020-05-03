@@ -918,7 +918,6 @@ void Graphe::afficherColoration(Svgfile &svgout)
                     if(maxi < m_sommets[i]->getCp())   ///trouver la valeur max
                     {
                         maxi=m_sommets[i]->getCp();
-                        std::cout<<"Maxi : "<<maxi<<std::endl;
                     }
 
                 }
