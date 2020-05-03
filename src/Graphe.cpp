@@ -918,7 +918,6 @@ void Graphe::afficherColoration(Svgfile &svgout)
                     if(maxi < m_sommets[i]->getCp())   ///trouver la valeur max
                     {
                         maxi=m_sommets[i]->getCp();
-                        std::cout<<"Maxi : "<<maxi<<std::endl;
                     }
 
                 }
@@ -1363,18 +1362,14 @@ void Graphe::AreteCi()
     std::vector<std::vector<int>> PCChemins;
     for(int i=0;i<getTaille();i++)
     {
-        std::cout<<"Arete etudiee :"<<m_arretes[i]->getID1()<<" "<<m_arretes[i]->getID2()<<std::endl;
     for (int j=0;j<=(getOrdre()-2);++j)///Fonctionne uniquement si l'ID des sommets commence par 0
     {
 
         for (int k=1+j;k<=getOrdre()-1;++k)
         {
-            std::cout<<"Sommets : "<<j<<" " <<k<<std::endl;
             PCChemins=DijkstraModif(j,k);
             n_pccI= AreteID(i,PCChemins);
-            std::cout<<"pccI: "<<n_pccI;
             n_pccJK=PCChemins.size();
-            std::cout<<" pccJK :"<<n_pccJK<<std::endl<<std::endl;
             Somme=Somme+(n_pccI/n_pccJK);
             n_pccJK=0;
             n_pccI=0;
@@ -1382,8 +1377,14 @@ void Graphe::AreteCi()
         }
     }
     C=(2*Somme)/(pow((double)getOrdre(),2.0)-(3*(double)getOrdre())+2);
-    std::cout << " C :"<<C<<std::endl;
     m_arretes[i]->setCiar(C);
     Somme=0;
+
 }
+
+std::cout<<"CI ARETES :"<<std::endl;
+    for(int i=0;i<getTaille();++i)
+    {
+        std::cout<<"Aretes N : "<<m_arretes[i]->getNumArrete()<<" Ci :"<<m_arretes[i]->getCiar()<<std::endl;
+    }
 }
